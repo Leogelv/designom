@@ -21,7 +21,7 @@ export function LibraryScreen({ onClose, onTab }) {
     <div className="om" style={{ position:'relative', width:'100%', minHeight:'100%', background:'var(--bone)', paddingBottom: bottomPad }}>
       {/* warm glow */}
       <div style={{ position:'absolute', top:0, left:0, right:0, height: 420, pointerEvents:'none',
-        background:'radial-gradient(70% 60% at 50% 0%, rgba(232,90,43,0.18), transparent 65%)' }}/>
+        background:'radial-gradient(70% 60% at 50% 0%, rgba(107,76,245,0.2), transparent 65%)' }}/>
 
       <StatusBar/>
       <TopBar onClose={onClose}/>
@@ -86,12 +86,12 @@ const CatChip = ({ active, children, onClick }) => (
   <button type="button" onClick={onClick} style={{
     height: 36, padding:'0 16px', borderRadius: 999,
     border: active? 'none' : '0.5px solid var(--hairline)',
-    background: active? 'linear-gradient(180deg,#FF7A4A,#E85A2B)' : 'var(--paper)',
+    background: active? 'linear-gradient(180deg, var(--amber-hi), var(--amber))' : 'var(--paper)',
     color: active? '#fff' : 'var(--ink)',
     fontSize: 13.5, fontWeight: 600, letterSpacing: -0.1, cursor:'pointer',
     whiteSpace:'nowrap', flexShrink: 0,
     boxShadow: active
-      ? 'inset 0 1px 0 rgba(255,255,255,0.35), 0 8px 18px -6px rgba(232,90,43,0.5)'
+      ? 'inset 0 1px 0 rgba(255,255,255,0.35), 0 8px 18px -6px var(--accent-glow)'
       : 'inset 0 1px 0 rgba(255,255,255,0.8)',
   }}>{children}</button>
 );
@@ -100,12 +100,12 @@ const FeaturedHero = () => (
   <div style={{
     position:'relative', borderRadius: 'var(--r-xl)', overflow:'hidden',
     boxShadow:'var(--shadow-lift)',
-    background:'linear-gradient(180deg,#1C1915 0%,#2B2621 100%)',
+      background:'linear-gradient(180deg,#1E1830 0%,#2A2240 100%)',
     padding: 16,
   }}>
     <div style={{
       position:'absolute', inset:0,
-      background:'radial-gradient(80% 60% at 50% 40%, rgba(255,180,140,0.45), transparent 70%)',
+      background:'radial-gradient(80% 60% at 50% 40%, rgba(180,160,255,0.5), transparent 70%)',
       pointerEvents:'none',
     }}/>
     <div style={{ position:'relative', height: 160, display:'flex', alignItems:'center', justifyContent:'center', marginBottom: 10 }}>
@@ -151,7 +151,7 @@ const LibItem = ({ title, duration, tone }) => (
       background: tone==='sage'? 'radial-gradient(60% 60% at 35% 30%, #E6F0DB, #9ABF8A 60%, #4B6B3F)'
                : tone==='lavender'? 'radial-gradient(60% 60% at 35% 30%, #ECE6F5, #9A8CC8 60%, #433477)'
                : tone==='sand'? 'radial-gradient(60% 60% at 35% 30%, #F4EBD3, #C9AE74 60%, #715A2C)'
-               : 'radial-gradient(60% 60% at 35% 30%, #FFE2CC, #F2804F 60%, #C23E14)',
+               : 'radial-gradient(60% 60% at 35% 30%, #E4D9FF, #8B6CFF 60%, #3D28A8)',
       display:'grid', placeItems:'center',
       boxShadow:'inset 0 2px 0 rgba(255,255,255,0.5), inset 0 -6px 14px rgba(60,20,0,0.3)',
     }}>

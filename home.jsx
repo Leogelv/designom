@@ -15,7 +15,7 @@ export function HomeScreen({ onOpenLibrary, onTab }) {
     <div className="om" style={{ position:'relative', width: '100%', minHeight: '100%', background: 'var(--bone)', paddingBottom: bottomPad }}>
       {/* ambient warmth */}
       <div style={{ position:'absolute', inset:'-20px 0 auto 0', height: 360, pointerEvents:'none',
-        background: 'radial-gradient(70% 60% at 85% 0%, rgba(232,90,43,0.16), transparent 60%), radial-gradient(60% 50% at 0% 20%, rgba(201,217,194,0.25), transparent 65%)',
+        background: 'radial-gradient(70% 60% at 85% 0%, rgba(107,76,245,0.16), transparent 60%), radial-gradient(60% 50% at 0% 20%, rgba(190,210,255,0.28), transparent 65%)',
       }}/>
 
       <StatusBar />
@@ -135,8 +135,8 @@ const BioAgeHero = () => (
     <div style={{ marginTop: 18, display:'flex', alignItems:'end', gap: 4, height: 36 }}>
       {[0.55,0.58,0.62,0.54,0.5,0.48,0.46].map((v,i)=>(
         <div key={i} style={{ flex:1, height: `${v*100}%`, borderRadius: 6,
-          background: i===6? 'linear-gradient(180deg,#FF7A4A,#E85A2B)' : 'var(--bone-2)',
-          boxShadow: i===6? '0 4px 10px -4px rgba(232,90,43,.5)' : 'inset 0 1px 0 rgba(255,255,255,0.6)',
+          background: i===6? 'linear-gradient(180deg, var(--amber-hi), var(--amber))' : 'var(--bone-2)',
+          boxShadow: i===6? '0 4px 10px -4px var(--accent-glow)' : 'inset 0 1px 0 rgba(255,255,255,0.6)',
         }}/>
       ))}
     </div>
@@ -154,19 +154,19 @@ const ProgressStrip = () => {
       display:'flex', alignItems:'center', gap: 14,
     }}>
       <div style={{ display:'flex', flexDirection:'column', gap: 2 }}>
-        <span style={{ fontSize: 11, letterSpacing: 0.14, textTransform:'uppercase', color:'rgba(244,238,228,0.55)' }}>Путь</span>
-        <span className="t-mono-num" style={{ fontSize: 20, fontWeight: 500, color:'#F4EEE4' }}>420 / 800</span>
+        <span style={{ fontSize: 11, letterSpacing: 0.14, textTransform:'uppercase', color:'rgba(240,236,255,0.55)' }}>Путь</span>
+        <span className="t-mono-num" style={{ fontSize: 20, fontWeight: 500, color:'#F0ECFF' }}>420 / 800</span>
       </div>
       <div style={{ flex:1, position:'relative', height: 8, borderRadius: 999, background:'rgba(255,255,255,0.07)', overflow:'hidden' }}>
         <div style={{ width: `${pct*100}%`, height:'100%', borderRadius: 999,
-          background:'linear-gradient(90deg,#FFE2CC,#FF7A4A,#E85A2B)',
-          boxShadow:'0 0 12px rgba(232,90,43,0.7)',
+          background:'linear-gradient(90deg, var(--amber-wash), var(--amber-hi), var(--amber))',
+          boxShadow:'0 0 12px var(--accent-glow-strong)',
         }}/>
         {[0.25,0.5,0.75].map(t=>(
           <span key={t} style={{ position:'absolute', top:-2, left:`${t*100}%`, width:1, height:12, background:'rgba(255,255,255,0.15)' }}/>
         ))}
       </div>
-      <span style={{ fontSize: 11, color:'rgba(244,238,228,0.55)', whiteSpace:'nowrap' }}>380 до след.</span>
+      <span style={{ fontSize: 11, color:'rgba(240,236,255,0.55)', whiteSpace:'nowrap' }}>380 до след.</span>
     </div>
   );
 };
@@ -198,8 +198,8 @@ const NutritionCard = ({ meals, setMeals }) => (
               : 'inset 0 1px 2px rgba(60,40,20,0.08)',
           }}>
             <span style={{ position:'absolute', top:8, right:8, fontSize:9.5, fontWeight:700,
-              background: done? 'rgba(255,255,255,0.55)' : '#FFE2CC',
-              color: done? '#2B4A2A' : '#C23E14',
+              background: done? 'rgba(255,255,255,0.55)' : 'var(--amber-wash)',
+              color: done? '#2B4A2A' : 'var(--amber-lo)',
               padding:'2px 6px', borderRadius:999,
             }}>+20</span>
             <div style={{ fontSize: 12.5, fontWeight: 600, marginBottom: 14 }}>{l}</div>
@@ -259,7 +259,7 @@ const InsightCard = () => (
   <div className="s-glass" style={{ padding: 14, borderRadius: 'var(--r-lg)', minHeight: 150, display:'flex', flexDirection:'column', justifyContent:'space-between' }}>
     <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
       <div className="t-kicker" style={{ color:'var(--amber-ink)' }}>Инсайт</div>
-      <Icon name="spark" size={14} color="#C23E14" stroke={1.8}/>
+      <Icon name="spark" size={14} color="var(--amber-lo)" stroke={1.8}/>
     </div>
     <div style={{ fontSize: 13.5, lineHeight: 1.35, color:'var(--ink)', textWrap:'pretty', fontWeight: 500 }}>
       Твоя зона внимания на этом протоколе — <em style={{ color:'var(--amber-lo)', fontFamily:'var(--font-display)', fontSize: 15 }}>снижение стресса</em> и поддержка нутриентами.
@@ -282,7 +282,7 @@ const AdviceCard = () => (
 const MediaRow = () => (
   <div className="s-paper" style={{ padding: 12, borderRadius: 'var(--r-lg)', display:'flex', alignItems:'center', gap: 12 }}>
     <div style={{ position:'relative', width: 52, height: 52, borderRadius: 14, overflow:'hidden',
-      background:'radial-gradient(60% 60% at 35% 30%, #FFE2CC, #F2804F 60%, #C23E14)',
+      background:'radial-gradient(60% 60% at 35% 30%, #E4D9FF, #8B6CFF 60%, #3D28A8)',
       flexShrink:0, display:'grid', placeItems:'center',
       boxShadow: 'inset 0 2px 0 rgba(255,255,255,0.5), inset 0 -6px 14px rgba(100,20,0,0.3)',
     }}>
@@ -310,7 +310,7 @@ const ArticleHero = ({ onClick }) => (
   }}>
     <div style={{
       height: 190, position:'relative',
-      background: 'radial-gradient(90% 80% at 50% 45%, #F8BFA3 0%, #E18865 55%, #C04D30 100%)',
+      background: 'radial-gradient(90% 80% at 50% 45%, #D8CCFF 0%, #9B7CFF 55%, #4A32B8 100%)',
       overflow:'hidden',
     }}>
       <div style={{ position:'absolute', left: 40, top: 18 }}>
@@ -348,7 +348,7 @@ const DynamicsCard = () => {
   const W = 280, H = 70;
   const lines = [
     { data:[0.55,0.6,0.52,0.7,0.68,0.8,0.82], color:'#2B4A2A', label:'Сон' },
-    { data:[0.65,0.55,0.7,0.5,0.45,0.4,0.35], color:'#E85A2B', label:'Стресс' },
+    { data:[0.65,0.55,0.7,0.5,0.45,0.4,0.35], color:'#7C5CFF', label:'Стресс' },
     { data:[0.4,0.5,0.6,0.55,0.7,0.72,0.78],  color:'#30274A', label:'Питание' },
   ];
   return (

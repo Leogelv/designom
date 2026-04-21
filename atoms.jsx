@@ -31,6 +31,9 @@ export const Icon = ({ name, size = 18, color = 'currentColor', stroke = 1.6 }) 
     search:  <><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></>,
     bell:    <><path d="M6 16V11a6 6 0 0112 0v5l2 2H4l2-2z"/><path d="M10 20a2 2 0 004 0"/></>,
     filter:  <path d="M4 5h16l-6 8v6l-4-2v-4L4 5z"/>,
+    camera:  <><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h3.2L9 3h6l2.8 3H21a2 2 0 012 2v11z"/><circle cx="12" cy="13" r="4"/></>,
+    heart:   <path d="M12 21s-7.5-4.35-7.5-10A4.5 4.5 0 0112 6a4.5 4.5 0 017.5 5c0 5.65-7.5 10-7.5 10z"/>,
+    arrowLeft: <><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></>,
   };
   return <svg viewBox="0 0 24 24" style={s}>{paths[name]}</svg>;
 };
@@ -62,11 +65,11 @@ export const StatusBar = ({ dark = false }) => {
 // Liquid blob — subject-matter imagery (не иконка, а объект)
 export const LiquidBlob = ({ tone = 'amber', size = 140 }) => {
   const palette = {
-    amber:    { a:'#FFE2CC', b:'#F2804F', c:'#C23E14', shine:'#FFF7F0' },
+    amber:    { a:'#E4D9FF', b:'#8B6CFF', c:'#3D28A8', shine:'#FAF5FF' },
     sage:     { a:'#E6F0DB', b:'#9ABF8A', c:'#4B6B3F', shine:'#F7FBF0' },
     lavender: { a:'#ECE6F5', b:'#9A8CC8', c:'#433477', shine:'#F6F0FC' },
     ink:      { a:'#4A423B', b:'#2B2621', c:'#14120F', shine:'#FFE6D4' },
-  }[tone] || { a:'#FFE2CC', b:'#F2804F', c:'#C23E14', shine:'#FFF7F0' };
+  }[tone] || { a:'#E4D9FF', b:'#8B6CFF', c:'#3D28A8', shine:'#FAF5FF' };
   const gid = `blob-${tone}-${Math.random().toString(36).slice(2,7)}`;
   return (
     <svg width={size} height={size} viewBox="0 0 140 140" className="om-float">
@@ -134,10 +137,10 @@ export const TabBar = ({ active = 'home', onTab }) => {
           <button key={t.id} type="button" onClick={() => onTab && onTab(t.id)} style={{
             border: 'none', cursor: 'pointer',
             width: 44, height: 44, borderRadius: 999, display: 'grid', placeItems: 'center',
-            background: on ? 'linear-gradient(180deg,#FF7A4A,#E85A2B)' : 'transparent',
-            color: on ? '#fff' : 'rgba(244,238,228,0.65)',
+            background: on ? 'linear-gradient(180deg, var(--amber-hi), var(--amber))' : 'transparent',
+            color: on ? '#fff' : 'rgba(240,236,255,0.7)',
             boxShadow: on
-              ? 'inset 0 1px 0 rgba(255,255,255,0.35), 0 8px 18px -6px rgba(232,90,43,0.6)'
+              ? 'inset 0 1px 0 rgba(255,255,255,0.35), 0 8px 18px -6px var(--accent-glow-strong)'
               : 'none',
             transition: 'all .2s',
           }}>
@@ -189,7 +192,7 @@ export const TopBar = ({ onClose, dark = false }) => {
 // Inline IconChip — small round tonal chip
 export const IconChip = ({ tone = 'amber', icon, size = 32 }) => {
   const pal = {
-    amber:    { bg:'#FBE1D3', ink:'#5A1E09' },
+    amber:    { bg:'#E8E4FF', ink:'#2E1866' },
     sage:     { bg:'#DDE8D1', ink:'#2B4A2A' },
     lavender: { bg:'#E4DEF1', ink:'#30274A' },
     sand:     { bg:'#E8DEC4', ink:'#4A3E22' },

@@ -13,8 +13,7 @@ root.render(
 );
 
 /**
- * Сплэш из index.html: убираем после гидрации (двойной rAF) или по «Начать».
- * transitionend + таймаут — гарантированно снимаем узел.
+ * Сплэш: снимаем только по кнопке «Начать» (приложение под ним уже смонтировано).
  */
 let splashHidden = false;
 function hideAppSplash() {
@@ -30,10 +29,4 @@ function hideAppSplash() {
   setTimeout(remove, 600);
 }
 
-const splash = document.getElementById('app-splash');
-const splashBtn = document.getElementById('app-splash__start');
-splashBtn?.addEventListener('click', () => hideAppSplash(), { once: true });
-
-requestAnimationFrame(() => {
-  requestAnimationFrame(hideAppSplash);
-});
+document.getElementById('app-splash__start')?.addEventListener('click', () => hideAppSplash(), { once: true });

@@ -42,13 +42,13 @@ export default function LibraryScreen({ onOpen }) {
             >
               Материал дня
             </div>
-            <div>
+            <div className="library-hero__lower">
               <div className="t-h3 c-inverse library-hero__title">
                 Как питание влияет
                 <br />
                 на организм и возраст
               </div>
-              <div className="library-hero__footer" style={{ marginTop: 'var(--sp-3)' }}>
+              <div className="library-hero__footer">
                 <div className="t-body-sm c-inverse" style={{ opacity: 0.92 }}>
                   6 минут
                 </div>

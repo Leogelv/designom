@@ -3,15 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>OM Health</title>
+    <meta name="theme-color" content="#EDE8F4" />
+    <title>ОМ-здоровье</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link rel="preload" href="/uploads/bgmainsplash.png" as="image" type="image/png" />
+    <link rel="stylesheet" href="/splash.css" />
   </head>
   <body>
+    <div id="app-splash" aria-live="polite" aria-label="Загрузка">
+      <div class="app-splash__content">
+        <h1 class="app-splash__brand">ОМ-здоровье</h1>
+        <p class="app-splash__greeting">
+          Добро пожаловать. Ваш личный ассистент здоровья: анализ симптомов, протоколы и забота о вас — в
+          одном месте.
+        </p>
+        <button type="button" id="app-splash__start" aria-label="Войти в приложение">Начать</button>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

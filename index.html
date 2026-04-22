@@ -16,13 +16,18 @@
   </head>
   <body>
     <div id="app-splash" aria-live="polite" aria-label="Загрузка">
-      <div class="app-splash__content">
-        <h1 class="app-splash__brand">ОМ-здоровье</h1>
-        <p class="app-splash__greeting">
-          Добро пожаловать. Ваш личный ассистент здоровья: анализ симптомов, протоколы и забота о вас — в
-          одном месте.
-        </p>
-        <button type="button" id="app-splash__start" aria-label="Войти в приложение">Начать</button>
+      <div class="app-splash__bg" aria-hidden="true"></div>
+      <div class="app-splash__inner">
+        <div class="app-splash__text">
+          <h1 class="app-splash__brand">ОМ-здоровье</h1>
+          <p class="app-splash__greeting">
+            Добро пожаловать. Ваш личный ассистент здоровья: анализ симптомов, протоколы и забота о вас — в
+            одном месте.
+          </p>
+        </div>
+        <button type="button" id="app-splash__start" class="app-splash__start" aria-label="Войти в приложение">
+          Начать
+        </button>
       </div>
     </div>
     <div id="root"></div>

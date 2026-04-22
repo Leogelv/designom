@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconChevL, IconChevR, IconMic, IconX } from './shared.jsx';
+import { withViewTransition } from '../viewTransition.js';
 
 const STEPS = [
   'Анализируем описание',
@@ -18,11 +19,19 @@ export default function ChatScreen() {
   const [message, setMessage] = useState('');
   const [activeLine, setActiveLine] = useState(0);
 
-  const goHome = useCallback(() => navigate('/'), [navigate]);
+  const goHome = useCallback(() => {
+    withViewTransition(() => navigate('/'));
+  }, [navigate]);
 
   const startAnalysis = useCallback(() => {
-    setPhase('analyzing');
-    setActiveLine(0);
+    withViewTransition(() => {
+      setPhase('analyzing');
+      setActiveLine(0);
+    });
+  }, []);
+
+  const backToInput = useCallback(() => {
+    withViewTransition(() => setPhase('input'));
   }, []);
 
   useEffect(() => {
@@ -62,16 +71,18 @@ export default function ChatScreen() {
       ) : (
         <ChatHeader
           title="Анализ симптомов"
-          left={<HeaderIconButton label="Назад" onClick={() => setPhase('input')} icon="back" />}
+          left={<HeaderIconButton label="Назад" onClick={backToInput} icon="back" />}
         />
       )}
 
       <div className="chat-symptom__frame">
-        {phase === 'input' ? (
-          <InputPanel message={message} setMessage={setMessage} onVoice={startAnalysis} onSend={startAnalysis} />
-        ) : (
-          <AnalyzingPanel activeLine={activeLine} />
-        )}
+        <div className="chat-symptom__phase vt-chat-surface">
+          {phase === 'input' ? (
+            <InputPanel message={message} setMessage={setMessage} onVoice={startAnalysis} onSend={startAnalysis} />
+          ) : (
+            <AnalyzingPanel activeLine={activeLine} />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -106,7 +117,7 @@ function InputPanel({ message, setMessage, onVoice, onSend }) {
   return (
     <>
       <div className="chat-symptom__center">
-        <button type="button" className="chat-symptom__mic" onClick={onVoice} aria-label="Голосовой ввод">
+        <button type="button" className="chat-symptom__mic vt-chat-mic-orb" onClick={onVoice} aria-label="Голосовой ввод">
           <span className="chat-symptom__mic-blob" aria-hidden />
           <IconMic size={44} style={{ color: 'white' }} />
         </button>
@@ -157,9 +168,9 @@ function AnalyzingPanel({ activeLine }) {
           <span className="sa-orb__ring" />
           <span className="sa-orb__ring" />
           <span className="sa-orb__ring" />
-          <div className="sa-orb__core">
+          <div className="sa-orb__core vt-chat-mic-orb">
             <span className="sa-orb__core-blob" aria-hidden />
-            <IconMic size={28} style={{ color: 'white', opacity: 0.95 }} />
+            <IconMic size={56} style={{ color: 'white', opacity: 0.95 }} />
           </div>
         </div>
 

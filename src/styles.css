@@ -480,6 +480,8 @@ button {
   z-index: 100;
   box-sizing: border-box;
   isolation: isolate;
+  /* View Transitions: не дублируем/не морфим таббар при смене экрана (уходит дёрготня на мобайле) */
+  view-transition-name: bottom-nav;
 }
 
 /* Плашка за активным табом: бренд-градиент/лаванда, плавно ездит (CSS + View Transitions) */
@@ -545,6 +547,18 @@ button {
 .bottom-nav-item.active { color: var(--primary-600); }
 .bottom-nav-item:hover { color: var(--text-secondary); }
 .bottom-nav-item.active:hover { color: var(--primary-600); }
+
+/* Статичный снимок таббара: без анимации группы, только контент «корня» плавно меняется */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(bottom-nav) {
+    animation: none;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.3s;
+    animation-timing-function: var(--ease-std);
+  }
+}
 
 /* ────────────────────────────────────────────────────────────
    AI Orb
@@ -1099,6 +1113,14 @@ button {
   overflow: visible;
 }
 
+/* Обертка фаз ввода / анализа (View Transitions: chat-surface) */
+.chat-symptom__phase {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Центр: круг с medit_blob + иконка микрофона + подсказка */
 .chat-symptom__center {
   flex: 1;
@@ -1234,6 +1256,25 @@ button {
   box-shadow: none;
 }
 
+/* Имена для View Transitions: морф кнопки микрофона → ядро орба; кроссфейд контента фазы */
+.vt-chat-mic-orb {
+  view-transition-name: chat-mic-orb;
+}
+.vt-chat-surface {
+  view-transition-name: chat-surface;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(chat-mic-orb) {
+    animation-duration: 0.48s;
+    animation-timing-function: var(--ease-emph);
+  }
+  ::view-transition-group(chat-surface) {
+    animation-duration: 0.32s;
+    animation-timing-function: var(--ease-std);
+  }
+}
+
 /* Экран ожидания: пульс + шаги */
 .chat-symptom__analyze {
   flex: 1;
@@ -1262,11 +1303,11 @@ button {
   letter-spacing: -0.02em;
 }
 
-/* Орб с кольцами (анимация) */
+/* Орб с кольцами (анимация). Ядро крупнее кнопки ввода (132px) — плавный рост при переходе в «Анализ» */
 .sa-orb {
   position: relative;
-  width: 108px;
-  height: 108px;
+  width: 200px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1285,11 +1326,11 @@ button {
   animation-delay: 0s;
 }
 .sa-orb__ring:nth-of-type(2) {
-  inset: -8px;
+  inset: -10px;
   animation-delay: 0.4s;
 }
 .sa-orb__ring:nth-of-type(3) {
-  inset: -16px;
+  inset: -22px;
   animation-delay: 0.8s;
 }
 
@@ -1307,8 +1348,8 @@ button {
 .sa-orb__core {
   position: relative;
   z-index: 2;
-  width: 76px;
-  height: 76px;
+  width: 148px;
+  height: 148px;
   border-radius: 50%;
   display: flex;
   align-items: center;

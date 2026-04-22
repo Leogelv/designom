@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useRef, useState, useCallback, useEffect } from 'react';
-import { flushSync } from 'react-dom';
 import { Home, FileText, MessageCircle, BookOpen, UserRound } from 'lucide-react';
+import { withViewTransition } from '../viewTransition.js';
 
 // ───────── Icons (stroke 1.75, rounded) ─────────
 export const Icon = ({
@@ -154,18 +154,8 @@ export function BottomNav({ active, onNavigate }) {
     };
   }, [updatePill]);
 
-  const canVt =
-    typeof document !== 'undefined' &&
-    typeof document.startViewTransition === 'function' &&
-    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   const go = (path) => {
-    const run = () => flushSync(() => onNavigate(path));
-    if (canVt) {
-      document.startViewTransition(run);
-    } else {
-      run();
-    }
+    withViewTransition(() => onNavigate(path));
   };
 
   return (

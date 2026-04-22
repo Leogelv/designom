@@ -1,69 +1,77 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { HomeScreen } from './home.jsx';
-import { LibraryScreen } from './library.jsx';
-import OnboardingPage from './pages/OnboardingPage.jsx';
-import BioAgeFlowPage from './pages/BioAgeFlowPage.jsx';
-import BioAgeResultPage from './pages/BioAgeResultPage.jsx';
-import { HealthTabScreen, ChatTabScreen, ProfileTabScreen } from './tabScreens.jsx';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import './styles.css';
+import { BottomNav } from './components/shared.jsx';
+import HomeScreen from './components/HomeScreen.jsx';
+import RecommendationsScreen from './components/RecommendationsScreen.jsx';
+import LibraryScreen from './components/LibraryScreen.jsx';
+import PlaceholderScreen from './components/PlaceholderScreen.jsx';
 
-function useTabNav() {
-  const navigate = useNavigate();
-  return React.useCallback(
-    (id) => {
-      const routes = {
-        home: '/',
-        journal: '/health',
-        chat: '/chat',
-        library: '/library',
-        me: '/profile',
-      };
-      const path = routes[id];
-      if (path) navigate(path);
-    },
-    [navigate],
+function pathToTabId(pathname) {
+  if (pathname.startsWith('/library')) return 'lib';
+  if (pathname.startsWith('/docs')) return 'docs';
+  if (pathname.startsWith('/chat')) return 'chat';
+  if (pathname.startsWith('/profile')) return 'me';
+  return 'home';
+}
+
+function Toast({ text, onClose }) {
+  useEffect(() => {
+    const t = setTimeout(onClose, 1600);
+    return () => clearTimeout(t);
+  }, [text, onClose]);
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        bottom: 24,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        background: 'rgba(26,22,48,0.92)',
+        color: 'white',
+        padding: '10px 18px',
+        borderRadius: 999,
+        fontSize: 13,
+        fontFamily: 'Inter, system-ui',
+        zIndex: 9999,
+        boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+      }}
+    >
+      {text}
+    </div>
   );
 }
 
-function HomePage() {
+function AppShell() {
   const navigate = useNavigate();
-  const onTab = useTabNav();
-  return <HomeScreen onOpenLibrary={() => navigate('/library')} onTab={onTab} />;
-}
+  const location = useLocation();
+  const [toast, setToast] = useState(null);
 
-function LibraryPage() {
-  const onTab = useTabNav();
-  return <LibraryScreen onTab={onTab} />;
-}
+  const open = (id) => setToast('Открытие: ' + id);
+  const close = () => setToast('Закрытие окна');
 
-function HealthPage() {
-  const onTab = useTabNav();
-  return <HealthTabScreen onTab={onTab} />;
-}
+  const active = pathToTabId(location.pathname);
 
-function ChatPage() {
-  const onTab = useTabNav();
-  return <ChatTabScreen onTab={onTab} />;
-}
-
-function ProfilePage() {
-  const onTab = useTabNav();
-  return <ProfileTabScreen onTab={onTab} />;
+  return (
+    <>
+      <div className="app-root">
+        <div className="app-frame">
+          <Routes>
+            <Route path="/" element={<HomeScreen onOpen={open} onClose={close} />} />
+            <Route path="/recommendations" element={<RecommendationsScreen onOpen={open} onClose={close} />} />
+            <Route path="/library" element={<LibraryScreen onOpen={open} onClose={close} />} />
+            <Route path="/docs" element={<PlaceholderScreen title="Документы" onClose={close} />} />
+            <Route path="/chat" element={<PlaceholderScreen title="Чат" onClose={close} />} />
+            <Route path="/profile" element={<PlaceholderScreen title="Профиль" onClose={close} />} />
+          </Routes>
+        </div>
+        <BottomNav active={active} onNavigate={(path) => navigate(path)} />
+      </div>
+      {toast && <Toast text={toast} onClose={() => setToast(null)} />}
+    </>
+  );
 }
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/onboarding" element={<OnboardingPage />} />
-        <Route path="/bio-age" element={<BioAgeFlowPage />} />
-        <Route path="/bio-age/result" element={<BioAgeResultPage />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/health" element={<HealthPage />} />
-        <Route path="/chat" element={<ChatPage />} />
-        <Route path="/library" element={<LibraryPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <AppShell />;
 }

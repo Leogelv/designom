@@ -927,8 +927,8 @@ button {
 
 /* ────────────────────────────────────────────────────────────
    Медитация: PNG /uploads/medblob2.png в круге (cover + scale ~4% — обрезка кромки)
-   Чат: medit_blob — без fill под картинкой (был “белый обод” на прозрачных полях)
-   Кроп: +4% к прежнему 108% → calc(108% * 1.04)
+   Чат: medit_blob; светлое кольцо = блик в PNG + прозрачь на белом экране (см. .chat-symptom__mic)
+   Кроп: calc(108% * 1.1) и scale(1.1) у medblob2
    ──────────────────────────────────────────────────────────── */
 .medit-blob {
   position: relative;
@@ -946,8 +946,8 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  /* ~+4% к кропу к краю круга (аналогично 108%→112% в чате) */
-  transform: scale(1.04);
+  /* +кроп под светлый внешний блик в PNG (тот же смысл, что zoom в чате) */
+  transform: scale(1.1);
   transform-origin: center center;
 }
 
@@ -1059,8 +1059,12 @@ button {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  /* medit_blob: зум; цвета фона в shorthand не задаём — иначе кольцо на прозрачных пикселях */
-  background: transparent url('/uploads/medit_blob.png') center / calc(108% * 1.04) calc(108% * 1.04) no-repeat;
+  /*
+   Фон: не из CSS «белой обводки» — в PNG по радиусу ~52–78% от центра пиксели
+   с RGB→254 (блик «стекла»), дальше — прозрачность, под ней виден белый экран.
+   Плюс var(--shadow-floating) даёт мягкое пурпурное ореол снаружи. Кропаем сильнее.
+  */
+  background: transparent url('/uploads/medit_blob.png') center / calc(108% * 1.1) calc(108% * 1.1) no-repeat;
   box-shadow: var(--shadow-floating);
   cursor: pointer;
   transition: transform var(--dur-base) var(--ease-std), box-shadow var(--dur-base) var(--ease-std);
@@ -1234,7 +1238,7 @@ button {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: transparent url('/uploads/medit_blob.png') center / calc(108% * 1.04) calc(108% * 1.04) no-repeat;
+  background: transparent url('/uploads/medit_blob.png') center / calc(108% * 1.1) calc(108% * 1.1) no-repeat;
   box-shadow: 0 10px 28px rgba(203, 118, 222, 0.35);
 }
 .sa-orb__core svg {

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useLayoutEffect, useRef, useState, useCallback, useEffect } from 'react';
+import { flushSync } from 'react-dom';
+import { Home, FileText, MessageCircle, BookOpen, UserRound } from 'lucide-react';
 
 // ───────── Icons (stroke 1.75, rounded) ─────────
 export const Icon = ({
@@ -104,122 +106,103 @@ export const IconBook2 = (p) => (
   </Icon>
 );
 
-// Tab bar icons — filled when active
-export const TabIconHome = ({ active }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill={active ? 'currentColor' : 'none'}
-    stroke="currentColor"
-    strokeWidth="1.75"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path
-      d="M3.5 11L12 4l8.5 7v8.5a1 1 0 01-1 1H15V14h-6v6.5H4.5a1 1 0 01-1-1V11z"
-      fillOpacity={active ? 0.14 : 0}
-    />
-  </svg>
-);
-export const TabIconDoc = ({ active }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill={active ? 'currentColor' : 'none'}
-    stroke="currentColor"
-    strokeWidth="1.75"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path
-      d="M6.5 3.5h8L19 8v11a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 015 19V5a1.5 1.5 0 011.5-1.5z"
-      fillOpacity={active ? 0.14 : 0}
-    />
-    <path d="M14 3.5V8h5" />
-    <path d="M8.5 12.5h7M8.5 16h5" />
-  </svg>
-);
-export const TabIconChat = ({ active }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill={active ? 'currentColor' : 'none'}
-    stroke="currentColor"
-    strokeWidth="1.75"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path
-      d="M4 6.5a3 3 0 013-3h10a3 3 0 013 3v7a3 3 0 01-3 3h-5l-4 3.5v-3.5H7a3 3 0 01-3-3v-7z"
-      fillOpacity={active ? 0.14 : 0}
-    />
-  </svg>
-);
-export const TabIconBook = ({ active }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill={active ? 'currentColor' : 'none'}
-    stroke="currentColor"
-    strokeWidth="1.75"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path
-      d="M5 4.5h5a3 3 0 013 3V20a2.5 2.5 0 00-2.5-2.5H5v-13z"
-      fillOpacity={active ? 0.14 : 0}
-    />
-    <path
-      d="M19 4.5h-5a3 3 0 00-3 3V20a2.5 2.5 0 012.5-2.5H19v-13z"
-      fillOpacity={active ? 0.14 : 0}
-    />
-  </svg>
-);
-export const TabIconUser = ({ active }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill={active ? 'currentColor' : 'none'}
-    stroke="currentColor"
-    strokeWidth="1.75"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <circle cx="12" cy="8" r="3.5" fillOpacity={active ? 0.14 : 0} />
-    <path
-      d="M4.5 20.5c1.6-4 4.3-6 7.5-6s5.9 2 7.5 6"
-      fillOpacity={active ? 0.14 : 0}
-    />
-  </svg>
-);
+/** Конфиг таббара: Lucide + маршруты (иконки — обводка, active толще) */
+const BOTTOM_TABS = [
+  { id: 'home', path: '/', label: 'Главная', Lucide: Home },
+  { id: 'docs', path: '/docs', label: 'Документы', Lucide: FileText },
+  { id: 'chat', path: '/chat', label: 'Чат', Lucide: MessageCircle },
+  { id: 'lib', path: '/library', label: 'Библиотека', Lucide: BookOpen },
+  { id: 'me', path: '/profile', label: 'Профиль', Lucide: UserRound },
+];
 
-/** Нижняя навигация: переход по path (React Router) */
+/**
+ * Нижняя навигация: Lucide; подсветка (плашка) смещает width/translate — анимация в CSS.
+ * Смена маршрута: document.startViewTransition + flushSync (если нет reduce-motion),
+ * чтобы View Transitions согласовывали снимок с обновлением React.
+ */
 export function BottomNav({ active, onNavigate }) {
-  const tabs = [
-    { id: 'home', path: '/', label: 'Главная', Icon: TabIconHome },
-    { id: 'docs', path: '/docs', label: 'Документы', Icon: TabIconDoc },
-    { id: 'chat', path: '/chat', label: 'Чат', Icon: TabIconChat },
-    { id: 'lib', path: '/library', label: 'Библиотека', Icon: TabIconBook },
-    { id: 'me', path: '/profile', label: 'Профиль', Icon: TabIconUser },
-  ];
+  const navRef = useRef(null);
+  const itemRefs = useRef([]);
+  const [pill, setPill] = useState({ x: 0, w: 0, ready: false });
+
+  const updatePill = useCallback(() => {
+    const el = navRef.current;
+    if (!el) return;
+    const idx = BOTTOM_TABS.findIndex((t) => t.id === active);
+    if (idx < 0) return;
+    const btn = itemRefs.current[idx];
+    if (!btn) return;
+    const n = el.getBoundingClientRect();
+    const b = btn.getBoundingClientRect();
+    setPill({ x: b.left - n.left, w: b.width, ready: true });
+  }, [active]);
+
+  useLayoutEffect(() => {
+    updatePill();
+  }, [updatePill, active]);
+
+  useEffect(() => {
+    const el = navRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver(() => updatePill());
+    ro.observe(el);
+    const onWin = () => updatePill();
+    window.addEventListener('resize', onWin);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', onWin);
+    };
+  }, [updatePill]);
+
+  const canVt =
+    typeof document !== 'undefined' &&
+    typeof document.startViewTransition === 'function' &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const go = (path) => {
+    const run = () => flushSync(() => onNavigate(path));
+    if (canVt) {
+      document.startViewTransition(run);
+    } else {
+      run();
+    }
+  };
+
   return (
-    <nav className="bottom-nav">
-      {tabs.map((t) => (
-        <button
-          key={t.id}
-          type="button"
-          className={'bottom-nav-item ' + (active === t.id ? 'active' : '')}
-          onClick={() => onNavigate(t.path)}
-        >
-          <t.Icon active={active === t.id} />
-          <span>{t.label}</span>
-        </button>
-      ))}
+    <nav className="bottom-nav" ref={navRef}>
+      <div
+        className="bottom-nav__pill"
+        aria-hidden
+        style={{
+          width: Math.max(0, pill.w),
+          transform: `translate3d(${pill.x}px,0,0)`,
+          opacity: pill.ready ? 1 : 0,
+        }}
+      />
+      {BOTTOM_TABS.map((t, i) => {
+        const isAct = active === t.id;
+        const L = t.Lucide;
+        return (
+          <button
+            key={t.id}
+            type="button"
+            className={'bottom-nav-item ' + (isAct ? 'active' : '')}
+            ref={(n) => {
+              itemRefs.current[i] = n;
+            }}
+            onClick={() => go(t.path)}
+          >
+            <L
+              className="bottom-nav-item__lucide"
+              size={24}
+              strokeWidth={isAct ? 2.15 : 1.6}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <span>{t.label}</span>
+          </button>
+        );
+      })}
     </nav>
   );
 }

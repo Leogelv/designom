@@ -465,8 +465,48 @@ button {
   display: flex;
   z-index: 100;
   box-sizing: border-box;
+  isolation: isolate;
 }
+
+/* Плашка за активным табом: бренд-градиент/лаванда, плавно ездит (CSS + View Transitions) */
+.bottom-nav__pill {
+  position: absolute;
+  left: 0;
+  top: 7px;
+  z-index: 0;
+  height: 50px;
+  border-radius: var(--r-control);
+  pointer-events: none;
+  transform-origin: left center;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary-100) 88%, #fff) 0%,
+    var(--primary-50) 38%,
+    color-mix(in srgb, var(--lavender-1) 92%, #fff) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--primary-200) 45%, transparent);
+  box-shadow:
+    0 4px 16px color-mix(in srgb, var(--primary-500) 14%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  will-change: transform, width, opacity;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bottom-nav__pill {
+    transition:
+      transform 0.36s var(--ease-emph),
+      width 0.36s var(--ease-emph),
+      opacity 0.2s var(--ease-std);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bottom-nav__pill {
+    transition: none;
+  }
+}
+
 .bottom-nav-item {
+  position: relative;
+  z-index: 1;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -477,9 +517,17 @@ button {
   font-size: 11px;
   font-weight: 500;
   color: var(--text-tertiary);
+  background: transparent;
+  border: none;
   transition: color var(--dur-fast) var(--ease-std);
+  cursor: pointer;
 }
-.bottom-nav-item svg { width: 24px; height: 24px; }
+.bottom-nav-item svg,
+.bottom-nav-item__lucide {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
 .bottom-nav-item.active { color: var(--primary-600); }
 .bottom-nav-item:hover { color: var(--text-secondary); }
 .bottom-nav-item.active:hover { color: var(--primary-600); }
@@ -878,15 +926,17 @@ button {
 }
 
 /* ────────────────────────────────────────────────────────────
-   Медитация: PNG /uploads/medblob2.png в круге (cover + border-radius)
-   Чат: /uploads/medit_blob.png — кроп через background-size, по центру
+   Медитация: PNG /uploads/medblob2.png в круге (cover + scale ~4% — обрезка кромки)
+   Чат: medit_blob — без fill под картинкой (был “белый обод” на прозрачных полях)
+   Кроп: +4% к прежнему 108% → calc(108% * 1.04)
    ──────────────────────────────────────────────────────────── */
 .medit-blob {
   position: relative;
   flex-shrink: 0;
   border-radius: 50%;
   overflow: hidden;
-  background: #f0eef6;
+  /* Фон круга — не светлое пятно: просвечивает карточка/родитель */
+  background: transparent;
   box-sizing: border-box;
 }
 .medit-blob__img {
@@ -896,6 +946,9 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  /* ~+4% к кропу к краю круга (аналогично 108%→112% в чате) */
+  transform: scale(1.04);
+  transform-origin: center center;
 }
 
 /* обёртка для орба AI (рекомендации / др.) */
@@ -1006,8 +1059,8 @@ button {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  /* medit_blob: единый зум (кроп по кругу), без смещения */
-  background: #e8e0f0 url('/uploads/medit_blob.png') center / 108% 108% no-repeat;
+  /* medit_blob: зум; цвета фона в shorthand не задаём — иначе кольцо на прозрачных пикселях */
+  background: transparent url('/uploads/medit_blob.png') center / calc(108% * 1.04) calc(108% * 1.04) no-repeat;
   box-shadow: var(--shadow-floating);
   cursor: pointer;
   transition: transform var(--dur-base) var(--ease-std), box-shadow var(--dur-base) var(--ease-std);
@@ -1181,7 +1234,7 @@ button {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #e0d8f0 url('/uploads/medit_blob.png') center / 108% 108% no-repeat;
+  background: transparent url('/uploads/medit_blob.png') center / calc(108% * 1.04) calc(108% * 1.04) no-repeat;
   box-shadow: 0 10px 28px rgba(203, 118, 222, 0.35);
 }
 .sa-orb__core svg {

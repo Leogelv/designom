@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconChevL, IconChevR, IconMic, IconX } from './shared.jsx';
 
@@ -33,8 +33,30 @@ export default function ChatScreen() {
     return () => clearInterval(id);
   }, [phase]);
 
+  const chatRootRef = useRef(null);
+  // WebKit: при F5/полном reload filter:drop-shadow первым кадром кропается по прямоугольнику;
+  // при заходе с таба лишняя отрисовка и всё ОК. Два rAF + read layout — тот же «второй» кадр.
+  useLayoutEffect(() => {
+    const root = chatRootRef.current;
+    if (!root) return undefined;
+    let raf2 = 0;
+    const raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => {
+        root
+          .querySelectorAll('.chat-symptom__mic-blob, .sa-orb__core-blob')
+          .forEach((n) => {
+            void n.getBoundingClientRect();
+          });
+      });
+    });
+    return () => {
+      cancelAnimationFrame(raf1);
+      if (raf2) cancelAnimationFrame(raf2);
+    };
+  }, [phase]);
+
   return (
-    <div className="screen chat-symptom">
+    <div ref={chatRootRef} className="screen chat-symptom">
       {phase === 'input' ? (
         <ChatHeader title="Анализ симптомов" left={<HeaderIconButton label="Закрыть" onClick={goHome} icon="x" />} />
       ) : (

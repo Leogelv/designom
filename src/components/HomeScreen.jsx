@@ -54,76 +54,77 @@ export default function HomeScreen({ onOpen }) {
         </div>
 
         <div className="section-gap">
-          <div className="t-title-lg c-primary" style={{ marginBottom: 'var(--sp-3)', paddingLeft: 2 }}>
+          <div
+            className="t-title-lg c-primary"
+            style={{ marginBottom: 'var(--section-title-gap)' }}
+          >
             Твой протокол
           </div>
 
-          <div className="card" style={{ padding: 0, cursor: 'default' }}>
-            <div
-              className="flex items-center"
-              style={{ gap: 'var(--sp-3)', padding: 'var(--sp-4) var(--sp-4) var(--sp-3)' }}
-            >
-              <div className="icon-square">
-                <IconFork size={20} />
+          <div className="list-cards">
+            <div className="card" style={{ padding: 0, cursor: 'default' }}>
+              <div
+                className="flex items-center"
+                style={{ gap: 'var(--card-row-gap)', padding: 'var(--card-pad) var(--card-pad) var(--sp-3)' }}
+              >
+                <div className="icon-square">
+                  <IconFork size={20} />
+                </div>
+                <div className="t-title-md c-primary">Дневник питания</div>
               </div>
-              <div className="t-title-md c-primary">Дневник питания</div>
+
+              <div style={{ padding: '0 var(--card-pad) var(--sp-2)' }}>
+                <MealRow label="Завтрак" pts={20} done />
+                <MealRow label="Обед" pts={20} done />
+                <MealRow label="Ужин" pts={20} done={dinner} onToggle={toggleDinner} last />
+              </div>
+
+              <div style={{ padding: '0 var(--card-pad) var(--card-pad)' }}>
+                <PillAction label="Перейти в дневник питания" onClick={() => onOpen('food-diary')} />
+              </div>
             </div>
 
-            <div style={{ padding: '0 var(--sp-5) var(--sp-2)' }}>
-              <MealRow label="Завтрак" pts={20} done />
-              <MealRow label="Обед" pts={20} done />
-              <MealRow label="Ужин" pts={20} done={dinner} onToggle={toggleDinner} last />
+            <div className="card tappable" onClick={() => onOpen('checkin-morning')}>
+              <div className="card-row">
+                <div className="card-row__lead">
+                  <div className="icon-square tint-peach">
+                    <IconSunFlat size={24} />
+                  </div>
+                </div>
+                <div className="card-row__body">
+                  <div className="flex items-center justify-between" style={{ gap: 'var(--sp-2)' }}>
+                    <div className="t-title-md c-primary">Утренний чекап</div>
+                    <span className="tag-done">Выполнено</span>
+                  </div>
+                  <div className="t-label-md c-brand mt-stack-tight" style={{ fontWeight: 600 }}>
+                    50 баллов
+                  </div>
+                  <div className="t-body-sm c-secondary mt-stack-text">
+                    Сегодня лучше обойтись без высокой нагрузки или «день обещает быть бодрым»!
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div style={{ padding: '0 var(--sp-3) var(--sp-3)' }}>
-              <PillAction label="Перейти в дневник питания" onClick={() => onOpen('food-diary')} />
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="card tappable"
-          style={{ marginTop: 'var(--sp-3)', padding: 'var(--sp-4)' }}
-          onClick={() => onOpen('checkin-morning')}
-        >
-          <div className="flex" style={{ gap: 'var(--sp-3)' }}>
-            <div className="icon-square tint-peach">
-              <IconSunFlat size={24} />
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between" style={{ gap: 'var(--sp-2)' }}>
-                <div className="t-title-md c-primary">Утренний чекап</div>
-                <span className="tag-done">Выполнено</span>
-              </div>
-              <div className="t-label-md c-brand" style={{ marginTop: 4, fontWeight: 600 }}>
-                50 баллов
-              </div>
-              <div className="t-body-sm c-secondary" style={{ marginTop: 8 }}>
-                Сегодня лучше обойтись без высокой нагрузки или «день обещает быть бодрым»!
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="card tappable"
-          style={{ marginTop: 'var(--sp-3)', padding: 'var(--sp-4)' }}
-          onClick={() => onOpen('checkin-evening')}
-        >
-          <div className="flex" style={{ gap: 'var(--sp-3)' }}>
-            <div className="icon-square tint-lavender">
-              <IconMoonFlat size={24} />
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between" style={{ gap: 'var(--sp-2)' }}>
-                <div className="t-title-md c-primary">Вечерний чекап</div>
-                <span className="tag-done">Выполнено</span>
-              </div>
-              <div className="t-label-md c-brand" style={{ marginTop: 4, fontWeight: 600 }}>
-                50 баллов
-              </div>
-              <div className="t-body-sm c-secondary" style={{ marginTop: 8 }}>
-                День был напряжённым, можно завершить его короткой практикой на 5 минут.
+            <div className="card tappable" onClick={() => onOpen('checkin-evening')}>
+              <div className="card-row">
+                <div className="card-row__lead">
+                  <div className="icon-square tint-lavender">
+                    <IconMoonFlat size={24} />
+                  </div>
+                </div>
+                <div className="card-row__body">
+                  <div className="flex items-center justify-between" style={{ gap: 'var(--sp-2)' }}>
+                    <div className="t-title-md c-primary">Вечерний чекап</div>
+                    <span className="tag-done">Выполнено</span>
+                  </div>
+                  <div className="t-label-md c-brand mt-stack-tight" style={{ fontWeight: 600 }}>
+                    50 баллов
+                  </div>
+                  <div className="t-body-sm c-secondary mt-stack-text">
+                    День был напряжённым, можно завершить его короткой практикой на 5 минут.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -244,8 +245,8 @@ function MealRow({ label, pts, done, onToggle, last }) {
     <div
       className="flex items-center"
       style={{
-        gap: 'var(--sp-3)',
-        padding: '10px 0',
+        gap: 'var(--card-row-gap)',
+        padding: 'var(--sp-2) 0',
         borderBottom: last ? 'none' : '1px solid var(--border-subtle)',
       }}
     >

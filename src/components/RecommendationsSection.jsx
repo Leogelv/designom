@@ -4,6 +4,7 @@ import { IconChevR, PillAction, MeditationBlob } from './shared.jsx';
 /**
  * Блок «Рекомендации» — вставляется в конец скролла главной.
  * (Отдельный маршрут /recommendations больше не используем.)
+ * Отступы: токены --card-pad, --card-row-gap, --card-lead, --stack-*.
  */
 export default function RecommendationsSection({ onOpen }) {
   return (
@@ -12,101 +13,108 @@ export default function RecommendationsSection({ onOpen }) {
         Рекомендации
       </h1>
 
-      <div className="card tappable" style={{ padding: 'var(--sp-4)' }} onClick={() => onOpen('attention')}>
-        <div className="flex items-center" style={{ gap: 'var(--sp-3)' }}>
-          <IconSparkle size={26} />
-          <div className="t-body-md c-secondary flex-1">
-            Ваша зона внимания на этом уровне — снижение стресса и поддержка нутриентами.
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="card tappable"
-        style={{ padding: 'var(--sp-4)', marginTop: 'var(--sp-3)' }}
-        onClick={() => onOpen('today-load')}
-      >
-        <div className="flex items-center" style={{ gap: 'var(--sp-3)' }}>
-          <IconSparkle size={26} />
-          <div className="t-body-md c-secondary flex-1">Сегодня лучше обойтись без высокой нагрузки.</div>
-        </div>
-      </div>
-
-      <div
-        className="card tappable section-gap"
-        style={{ padding: 'var(--sp-4)' }}
-        onClick={() => onOpen('meditation')}
-      >
-        <div className="flex items-center" style={{ gap: 'var(--sp-4)' }}>
-          <MeditationBlob size={58} />
-          <div className="flex-1 min-w-0">
-            <div className="t-title-lg c-primary">Медитация</div>
-            <div className="t-body-md c-brand" style={{ fontWeight: 600, marginTop: 2 }}>
-              20 баллов
+      <div className="list-cards list-cards--rec">
+        <div className="card tappable" onClick={() => onOpen('attention')}>
+          <div className="card-row card-row--center">
+            <div className="card-row__lead">
+              <IconSparkle size={26} />
             </div>
-            <div className="t-body-sm c-tertiary" style={{ marginTop: 4 }}>
-              Аудио-практика · 10 минут
+            <div className="card-row__body">
+              <div className="t-body-md c-secondary">
+                Ваша зона внимания на этом уровне — снижение стресса и поддержка нутриентами.
+              </div>
             </div>
           </div>
-          <ArrowChip
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpen('meditation');
-            }}
-          />
         </div>
-      </div>
 
-      <div
-        className="card tappable"
-        style={{ padding: 'var(--sp-4)', marginTop: 'var(--sp-3)' }}
-        onClick={() => onOpen('material')}
-      >
-        <div className="flex items-center" style={{ gap: 'var(--sp-4)' }}>
-          <div className="icon-square tint-pink" style={{ width: 44, height: 44 }}>
-            <IconOpenBook size={22} />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="t-label-md c-tertiary">Материал дня</div>
-            <div className="t-title-md c-primary" style={{ marginTop: 2 }}>
-              Как питание влияет на
-              <br />
-              организм и возраст
+        <div className="card tappable" onClick={() => onOpen('today-load')}>
+          <div className="card-row card-row--center">
+            <div className="card-row__lead">
+              <IconSparkle size={26} />
             </div>
-            <div className="t-body-sm c-tertiary" style={{ marginTop: 6 }}>
-              6 минут
+            <div className="card-row__body">
+              <div className="t-body-md c-secondary">Сегодня лучше обойтись без высокой нагрузки.</div>
             </div>
           </div>
-          <ArrowChip
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpen('material');
-            }}
-          />
         </div>
-      </div>
 
-      <div
-        className="card tappable"
-        style={{
-          padding: 'var(--sp-4)',
-          marginTop: 'var(--sp-3)',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-        onClick={() => onOpen('dynamics')}
-      >
-        <div style={{ position: 'relative' }}>
+        <div
+          className="card tappable u-before-section"
+          onClick={() => onOpen('meditation')}
+        >
+          <div className="card-row">
+            <div className="card-row__lead">
+              <MeditationBlob size={58} />
+            </div>
+            <div className="card-row__body">
+              <div className="t-title-lg c-primary">Медитация</div>
+              <div className="t-body-md c-brand mt-stack-tight" style={{ fontWeight: 600 }}>
+                20 баллов
+              </div>
+              <div className="t-body-sm c-tertiary mt-stack-text">Аудио-практика · 10 минут</div>
+            </div>
+            <div className="card-row__tail">
+              <ArrowChip
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpen('meditation');
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="card tappable" onClick={() => onOpen('material')}>
+          <div className="card-row">
+            <div className="card-row__lead">
+              <div className="icon-square tint-pink">
+                <IconOpenBook size={22} />
+              </div>
+            </div>
+            <div className="card-row__body">
+              <div className="t-label-md c-tertiary">Материал дня</div>
+              <div className="t-title-md c-primary mt-stack-tight">
+                Как питание влияет на
+                <br />
+                организм и возраст
+              </div>
+              <div className="t-body-sm c-tertiary mt-stack-text">6 минут</div>
+            </div>
+            <div className="card-row__tail">
+              <ArrowChip
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpen('material');
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="card tappable"
+          style={{ position: 'relative', overflow: 'hidden' }}
+          onClick={() => onOpen('dynamics')}
+        >
           <div className="t-title-lg c-primary">Динамика</div>
-          <div className="t-body-md c-secondary" style={{ marginTop: 6 }}>
+          <div className="t-body-md c-secondary mt-stack-text">
             Ознакомься со своей динамикой сна, стресса и питания за неделю.
           </div>
-        </div>
-        <div style={{ position: 'relative', height: 72, marginTop: 12, marginLeft: -16, marginRight: -16 }}>
-          <DynamicsWave />
-        </div>
-        <div style={{ marginTop: 'var(--sp-3)', position: 'relative' }}>
-          <PillAction label="Перейти к динамике" onClick={() => onOpen('dynamics')} />
+          <div
+            className="dynamics-card__chart"
+            style={{
+              position: 'relative',
+              height: 72,
+              marginTop: 'var(--stack-block)',
+              marginLeft: 'calc(-1 * var(--card-pad))',
+              marginRight: 'calc(-1 * var(--card-pad))',
+            }}
+          >
+            <DynamicsWave />
+          </div>
+          <div className="mt-stack-block" style={{ position: 'relative' }}>
+            <PillAction label="Перейти к динамике" onClick={() => onOpen('dynamics')} />
+          </div>
         </div>
       </div>
     </section>

@@ -269,8 +269,7 @@ export function AIOrb({ size = 96, animated = true }) {
 const MEDIT_CIRCLE_SRC = '/uploads/medblob2.png';
 
 /**
- * Иллюстрация «Медитация» в карточке: PNG в круге.
- * scale ~1/0.94 — обрезка ~3% кромки с каждой стороны (см. .medit-blob__img).
+ * Иллюстрация «Медитация» в карточке: PNG в круге (см. .medit-blob, .medit-blob__img).
  */
 export function MeditationBlob({ size = 58 }) {
   return (

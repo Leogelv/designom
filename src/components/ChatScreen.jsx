@@ -85,6 +85,7 @@ function InputPanel({ message, setMessage, onVoice, onSend }) {
     <>
       <div className="chat-symptom__center">
         <button type="button" className="chat-symptom__mic" onClick={onVoice} aria-label="Голосовой ввод">
+          <span className="chat-symptom__mic-blob" aria-hidden />
           <IconMic size={44} style={{ color: 'white' }} />
         </button>
         <p className="t-body-md c-secondary chat-symptom__hint">
@@ -135,6 +136,7 @@ function AnalyzingPanel({ activeLine }) {
           <span className="sa-orb__ring" />
           <span className="sa-orb__ring" />
           <div className="sa-orb__core">
+            <span className="sa-orb__core-blob" aria-hidden />
             <IconMic size={28} style={{ color: 'white', opacity: 0.95 }} />
           </div>
         </div>

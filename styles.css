@@ -982,12 +982,14 @@ button {
    Фон: белый elevated; акцент: --grad-brand, --primary-500
    ──────────────────────────────────────────────────────────── */
 
+/* Перекрываем .screen { overflow: hidden } — иначе на мобилках кропается filter: drop-shadow */
 .chat-symptom {
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
   background: var(--bg-elevated);
+  overflow: visible;
 }
 
 .chat-symptom__header {
@@ -1036,6 +1038,7 @@ button {
   min-height: 0;
   display: flex;
   flex-direction: column;
+  overflow: visible;
 }
 
 /* Центр: круг с medit_blob + иконка микрофона + подсказка */
@@ -1048,6 +1051,7 @@ button {
   justify-content: center;
   padding: var(--sp-6) var(--sp-5) var(--sp-4);
   gap: var(--sp-6);
+  overflow: visible;
 }
 
 /* Не box-shadow на кнопке — он квадратный; глоу на .mic-blob (drop-shadow ~ альфа PNG) */
@@ -1175,6 +1179,7 @@ button {
   display: flex;
   flex-direction: column;
   padding: var(--sp-4) var(--sp-5) 0;
+  overflow: visible;
 }
 
 .chat-symptom__analyze-main {
@@ -1185,6 +1190,7 @@ button {
   justify-content: center;
   gap: var(--sp-5);
   padding: var(--sp-4) 0 var(--sp-6);
+  overflow: visible;
 }
 
 .chat-symptom__analyze-head {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import './styles.css';
 import { BottomNav } from './components/shared.jsx';
 import HomeScreen from './components/HomeScreen.jsx';
-import RecommendationsScreen from './components/RecommendationsScreen.jsx';
 import LibraryScreen from './components/LibraryScreen.jsx';
+import ChatScreen from './components/ChatScreen.jsx';
 import PlaceholderScreen from './components/PlaceholderScreen.jsx';
 
 function pathToTabId(pathname) {
@@ -57,10 +57,13 @@ function AppShell() {
         <div className="app-frame">
           <Routes>
             <Route path="/" element={<HomeScreen onOpen={open} />} />
-            <Route path="/recommendations" element={<RecommendationsScreen onOpen={open} />} />
+            <Route
+              path="/recommendations"
+              element={<Navigate replace to={{ pathname: '/', hash: 'recommendations' }} />}
+            />
             <Route path="/library" element={<LibraryScreen onOpen={open} />} />
             <Route path="/docs" element={<PlaceholderScreen title="Документы" />} />
-            <Route path="/chat" element={<PlaceholderScreen title="Чат" />} />
+            <Route path="/chat" element={<ChatScreen />} />
             <Route path="/profile" element={<PlaceholderScreen title="Профиль" />} />
           </Routes>
         </div>

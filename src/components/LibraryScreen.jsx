@@ -20,7 +20,7 @@ export default function LibraryScreen({ onOpen }) {
         <h1 className="t-h1 c-primary screen-title">Библиотека</h1>
 
         <div
-          className="hero-card hero-card--image"
+          className="hero-card hero-card--image library-hero"
           onClick={() => onOpen('material')}
           style={{ aspectRatio: '16 / 10' }}
         >
@@ -30,16 +30,7 @@ export default function LibraryScreen({ onOpen }) {
             aria-hidden
           />
           <div className="hero-card__scrim" aria-hidden />
-          <div
-            style={{
-              position: 'relative',
-              zIndex: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              height: '100%',
-            }}
-          >
+          <div className="library-hero__inner">
             <div
               className="tag"
               style={{
@@ -52,12 +43,12 @@ export default function LibraryScreen({ onOpen }) {
               Материал дня
             </div>
             <div>
-              <div className="t-h3 c-inverse" style={{ maxWidth: '85%', fontWeight: 700 }}>
+              <div className="t-h3 c-inverse library-hero__title">
                 Как питание влияет
                 <br />
                 на организм и возраст
               </div>
-              <div className="flex items-center justify-between" style={{ marginTop: 'var(--sp-3)' }}>
+              <div className="library-hero__footer" style={{ marginTop: 'var(--sp-3)' }}>
                 <div className="t-body-sm c-inverse" style={{ opacity: 0.92 }}>
                   6 минут
                 </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { IconCheck, IconPlus, IconChevR } from './shared.jsx';
+import { IconCheck, IconPlus, PillAction } from './shared.jsx';
+import RecommendationsSection from './RecommendationsSection.jsx';
 
 const GRAD_TILE_1 = '/uploads/grad11.png';
 const GRAD_TILE_2 = '/uploads/grad16_9.png';
@@ -19,13 +19,13 @@ export default function HomeScreen({ onOpen }) {
           Привет, Надежда!
         </h1>
         <div style={{ marginBottom: 'var(--sp-4)' }}>
-          <Link
-            to="/recommendations"
+          <a
+            href="#recommendations"
             className="t-label-md c-brand"
             style={{ fontWeight: 600, textDecoration: 'none' }}
           >
-            Рекомендации →
-          </Link>
+            К рекомендациям ↓
+          </a>
         </div>
 
         <div className="metric-grid">
@@ -48,7 +48,7 @@ export default function HomeScreen({ onOpen }) {
                 420<span style={{ fontWeight: 600, opacity: 0.85 }}>/800</span>
               </>
             }
-            desc="Тебе остаться 380 баллов до успешного завершения уровня"
+            desc="Тебе осталось 380 баллов до успешного завершения уровня"
             corner={<RingBadge pct={52} />}
           />
         </div>
@@ -128,6 +128,8 @@ export default function HomeScreen({ onOpen }) {
             </div>
           </div>
         </div>
+
+        <RecommendationsSection onOpen={onOpen} />
       </div>
     </div>
   );
@@ -262,14 +264,3 @@ function MealRow({ label, pts, done, onToggle, last }) {
   );
 }
 
-/** Кнопка «Перейти…» — общая с экраном рекомендаций */
-export function PillAction({ label, onClick }) {
-  return (
-    <button type="button" className="pill-action" onClick={onClick}>
-      <span className="pill-action-label">{label}</span>
-      <span className="pill-action-chip">
-        <IconChevR size={14} sw={2.3} />
-      </span>
-    </button>
-  );
-}

@@ -30,6 +30,37 @@ export const IconChevR = (p) => (
     <path d="M9 6l6 6-6 6" />
   </Icon>
 );
+/** Назад (стрелка влево) — шапка экрана анализа */
+export const IconChevL = (p) => (
+  <Icon {...p}>
+    <path d="M15 6l-6 6 6 6" />
+  </Icon>
+);
+/** Закрыть */
+export const IconX = (p) => (
+  <Icon {...p}>
+    <path d="M5 5l14 14M19 5L5 19" />
+  </Icon>
+);
+/** Микрофон — ввод по голосу */
+export const IconMic = ({ size = 24, style, ...rest }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.75"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={style}
+    {...rest}
+  >
+    <rect x="9" y="2" width="6" height="11" rx="3" />
+    <path d="M5 10a7 7 0 0 0 14 0" />
+    <path d="M12 19v3" />
+  </svg>
+);
 export const IconCheck = (p) => (
   <Icon {...p} sw={2.2}>
     <path d="M5 12l4 4 10-10" />
@@ -232,5 +263,17 @@ export function AIOrb({ size = 96, animated = true }) {
     >
       <div className="ai-orb__fill" />
     </div>
+  );
+}
+
+/** Кнопка-«пилюля» с фиолетовой стрелкой (дневник, динамика и т.д.) */
+export function PillAction({ label, onClick }) {
+  return (
+    <button type="button" className="pill-action" onClick={onClick}>
+      <span className="pill-action-label">{label}</span>
+      <span className="pill-action-chip">
+        <IconChevR size={14} sw={2.3} />
+      </span>
+    </button>
   );
 }

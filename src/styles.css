@@ -269,11 +269,6 @@ button {
   pointer-events: none;
   border-radius: inherit;
 }
-/* Читабельность белого текста на ярком фото без тёмного оверлея */
-.hero-card--image .t-h3,
-.hero-card--image .t-body-sm {
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.28), 0 0 18px rgba(0, 0, 0, 0.12);
-}
 .hero-card--image {
   background: var(--primary-900);
 }
@@ -594,6 +589,11 @@ button {
 .section-gap { margin-top: var(--sp-6); }
 .section-gap-sm { margin-top: var(--sp-5); }
 
+/* якорь «К рекомендациям ↓» — чтобы заголовок не уезжал под край */
+#recommendations {
+  scroll-margin-top: 16px;
+}
+
 /* ────────────────────────────────────────────────────────────
    Метрики BioAge / Прогресс — чёткое фото из uploads/*.png, без scrim и blur
    ──────────────────────────────────────────────────────────── */
@@ -645,7 +645,6 @@ button {
   font-weight: 600;
   color: rgba(255,255,255,0.92);
   letter-spacing: -0.01em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 14px rgba(0, 0, 0, 0.12);
 }
 .grad-tile-badge {
   width: 26px; height: 26px;
@@ -654,7 +653,6 @@ button {
   border: 1px solid rgba(255,255,255,0.25);
   display: inline-flex; align-items: center; justify-content: center;
   color: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 .grad-tile-value {
   position: relative;
@@ -665,7 +663,6 @@ button {
   line-height: 32px;
   letter-spacing: -0.02em;
   margin-top: 10px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.32), 0 0 16px rgba(0, 0, 0, 0.14);
 }
 .grad-tile-value span {
   font-family: var(--font-primary);
@@ -683,7 +680,52 @@ button {
   font-size: 11.5px;
   line-height: 15px;
   color: rgba(255,255,255,0.94);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+}
+
+/* Библиотека: крупная карточка — воздух по краям, кнопка не режется overflow */
+.library-hero.hero-card {
+  padding: var(--sp-4) var(--sp-4) var(--sp-5);
+  box-sizing: border-box;
+}
+@media (min-width: 400px) {
+  .library-hero.hero-card {
+    padding: var(--sp-5) var(--sp-5) var(--sp-6);
+  }
+}
+.library-hero__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  gap: var(--sp-2);
+}
+.library-hero__title {
+  max-width: 100%;
+  font-weight: 700;
+}
+.library-hero__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  width: 100%;
+  min-width: 0;
+  padding-top: 2px;
+}
+.library-hero__footer .t-body-sm {
+  min-width: 0;
+  flex: 1;
+}
+/* Тень кнопки + overflow:hidden у hero-card иначе обрезает справа */
+.library-hero .icon-btn {
+  box-shadow: none;
+  flex-shrink: 0;
 }
 
 /* ────────────────────────────────────────────────────────────
@@ -823,3 +865,297 @@ button {
 }
 .arrow-chip:hover { background: var(--primary-50); }
 .arrow-chip:active { transform: scale(0.94); }
+
+/* ────────────────────────────────────────────────────────────
+   Чат — «Анализ симптомов» (ввод + ожидание ИИ)
+   Фон: белый elevated; акцент: --grad-brand, --primary-500
+   ──────────────────────────────────────────────────────────── */
+
+.chat-symptom {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-elevated);
+}
+
+.chat-symptom__header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  padding: max(10px, env(safe-area-inset-top, 0px) + 4px) var(--sp-4) 10px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+}
+
+.chat-symptom__header-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+}
+
+.chat-symptom__icon-btn {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-pill);
+  color: var(--text-primary);
+  transition: background var(--dur-fast) var(--ease-std);
+}
+.chat-symptom__icon-btn:hover {
+  background: var(--bg-muted);
+}
+.chat-symptom__icon-btn:active {
+  transform: scale(0.96);
+}
+
+.chat-symptom__title {
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.chat-symptom__frame {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Центр: градиентный микрофон + подсказка */
+.chat-symptom__center {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-6) var(--sp-5) var(--sp-4);
+  gap: var(--sp-6);
+}
+
+.chat-symptom__mic {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--grad-brand);
+  box-shadow: var(--shadow-floating);
+  cursor: pointer;
+  transition: transform var(--dur-base) var(--ease-std), box-shadow var(--dur-base) var(--ease-std);
+}
+.chat-symptom__mic:hover {
+  transform: scale(1.03);
+  box-shadow: 0 20px 48px rgba(123, 87, 246, 0.22);
+}
+.chat-symptom__mic:active {
+  transform: scale(0.97);
+}
+
+.chat-symptom__hint {
+  margin: 0;
+  text-align: center;
+  max-width: 300px;
+  line-height: 1.45;
+}
+
+/* Нижний блок: «Или введите текст» + textarea + send */
+.chat-symptom__composer {
+  flex-shrink: 0;
+  padding: 0 var(--sp-5) var(--sp-2);
+  margin-top: auto;
+}
+
+.chat-symptom__composer-inner {
+  background: var(--lavender-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-xl);
+  padding: var(--sp-3) var(--sp-4) var(--sp-3);
+  box-shadow: var(--shadow-card-soft);
+}
+
+.chat-symptom__composer-label {
+  display: block;
+  margin-bottom: var(--sp-2);
+  letter-spacing: 0.02em;
+}
+
+.chat-symptom__composer-row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-3);
+}
+
+.chat-symptom__input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  max-height: 120px;
+  padding: 10px 0 10px 2px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-secondary);
+  font-size: 15px;
+  line-height: 1.4;
+  resize: none;
+  outline: none;
+}
+.chat-symptom__input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.chat-symptom__send {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-500);
+  box-shadow: 0 4px 14px rgba(142, 99, 248, 0.35);
+  transition: background var(--dur-fast) var(--ease-std), transform var(--dur-fast) var(--ease-std);
+}
+.chat-symptom__send:hover:not(:disabled) {
+  background: var(--primary-600);
+}
+.chat-symptom__send:active:not(:disabled) {
+  transform: scale(0.94);
+}
+.chat-symptom__send:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Экран ожидания: пульс + шаги */
+.chat-symptom__analyze {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-4) var(--sp-5) 0;
+}
+
+.chat-symptom__analyze-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-5);
+  padding: var(--sp-4) 0 var(--sp-6);
+}
+
+.chat-symptom__analyze-head {
+  margin: 0;
+  text-align: center;
+  max-width: 320px;
+  letter-spacing: -0.02em;
+}
+
+/* Орб с кольцами (анимация) */
+.sa-orb {
+  position: relative;
+  width: 108px;
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--sp-1);
+}
+.sa-orb__ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary-200);
+  pointer-events: none;
+  animation: sa-pulse 2.4s var(--ease-std) infinite;
+  opacity: 0;
+}
+.sa-orb__ring:nth-of-type(1) {
+  inset: 0;
+  animation-delay: 0s;
+}
+.sa-orb__ring:nth-of-type(2) {
+  inset: -8px;
+  animation-delay: 0.4s;
+}
+.sa-orb__ring:nth-of-type(3) {
+  inset: -16px;
+  animation-delay: 0.8s;
+}
+
+@keyframes sa-pulse {
+  0% {
+    transform: scale(0.72);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+
+.sa-orb__core {
+  position: relative;
+  z-index: 2;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--grad-brand);
+  box-shadow: 0 10px 28px rgba(203, 118, 222, 0.35);
+}
+
+.chat-symptom__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.chat-symptom__step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  color: var(--text-tertiary);
+  transition: color var(--dur-slow) var(--ease-std);
+}
+.chat-symptom__step.is-active {
+  color: var(--text-secondary);
+}
+.chat-symptom__step .t-body-md {
+  padding-top: 1px;
+  line-height: 1.4;
+}
+.chat-symptom__step-mark {
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+  margin-top: 1px;
+  transition: color var(--dur-slow) var(--ease-std);
+}
+.chat-symptom__step.is-active .chat-symptom__step-mark {
+  color: var(--primary-500);
+}
+
+.chat-symptom__footer-hint {
+  text-align: center;
+  margin: 0;
+  padding: var(--sp-4) 0 var(--sp-2);
+  flex-shrink: 0;
+}

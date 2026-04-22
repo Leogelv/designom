@@ -167,7 +167,7 @@ body {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
 }
 
 button {
@@ -475,7 +475,8 @@ button {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--border-subtle);
-  padding: 10px 6px calc(16px + env(safe-area-inset-bottom, 0px));
+  /* Нижний отступ: больше воздуха от подписи до низа плашки / экрана */
+  padding: 10px 6px calc(22px + env(safe-area-inset-bottom, 0px));
   display: flex;
   z-index: 100;
   box-sizing: border-box;
@@ -484,14 +485,16 @@ button {
   view-transition-name: bottom-nav;
 }
 
-/* Плашка за активным табом: бренд-градиент/лаванда, плавно ездит (CSS + View Transitions) */
+/* Плашка за активным табом: бренд-градиент/лаванда; тянется вниз до низа меню (вкл. safe area) */
 .bottom-nav__pill {
   position: absolute;
   left: 0;
-  top: 7px;
+  top: 8px;
+  bottom: 0;
   z-index: 0;
-  height: 50px;
-  border-radius: var(--r-control);
+  height: auto;
+  /* Скругление только сверху — снизу плашка смыкается с низом полосы */
+  border-radius: var(--r-control) var(--r-control) 0 0;
   pointer-events: none;
   transform-origin: left center;
   background: linear-gradient(
@@ -528,7 +531,8 @@ button {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  padding: 6px 4px;
+  /* Увеличенный низ: от подписи до низа плашки/экрана */
+  padding: 6px 4px 14px;
   font-family: var(--font-secondary);
   font-size: 11px;
   font-weight: 500;

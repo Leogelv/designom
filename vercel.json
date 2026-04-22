@@ -2,7 +2,7 @@
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
   "headers": [
     {
-      "source": "/(.*\\.(png|jpg|jpeg|webp|svg|gif|ico|avif))",
+      "source": "/uploads/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

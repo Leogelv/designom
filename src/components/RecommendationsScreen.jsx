@@ -1,11 +1,10 @@
 import React from 'react';
-import { TopBar, IconChevR, AIOrb } from './shared.jsx';
+import { IconChevR, AIOrb } from './shared.jsx';
 import { PillAction } from './HomeScreen.jsx';
 
-export default function RecommendationsScreen({ onOpen, onClose }) {
+export default function RecommendationsScreen({ onOpen }) {
   return (
     <div className="screen">
-      <TopBar onClose={onClose} />
       <div className="screen-scroll">
         <h1 className="t-h1 c-primary" style={{ margin: '0 0 var(--sp-4)' }}>
           Рекомендации

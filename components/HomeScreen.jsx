@@ -1,12 +1,11 @@
 // Home — Главная (matches reference exactly)
 
-function HomeScreen({ onOpen, onClose }) {
+function HomeScreen({ onOpen }) {
   const [dinner, setDinner] = useState(false);
   const toggleDinner = (e) => { e.stopPropagation(); setDinner(x => !x); };
 
   return (
     <div className="screen">
-      <TopBar onClose={onClose} />
       <div className="screen-scroll">
         {/* Greeting */}
         <h1 className="t-h1 c-primary" style={{ margin: '0 0 var(--sp-4)' }}>

@@ -1,11 +1,9 @@
 import React from 'react';
-import { TopBar } from './shared.jsx';
 
 /** Заглушка для вкладок без макета */
-export default function PlaceholderScreen({ title, onClose }) {
+export default function PlaceholderScreen({ title }) {
   return (
     <div className="screen">
-      <TopBar onClose={onClose} />
       <div
         style={{
           flex: 1,

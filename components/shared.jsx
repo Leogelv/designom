@@ -10,10 +10,6 @@ const Icon = ({ size = 20, fill = 'none', stroke = 'currentColor', sw = 1.75, ch
   </svg>
 );
 
-const IconClose = (p) => <Icon {...p}><path d="M5 5l14 14M19 5L5 19" /></Icon>;
-const IconDots = (p) => <Icon {...p} fill="currentColor" stroke="none">
-  <circle cx="5" cy="12" r="1.7" /><circle cx="12" cy="12" r="1.7" /><circle cx="19" cy="12" r="1.7" />
-</Icon>;
 const IconChevR = (p) => <Icon {...p}><path d="M9 6l6 6-6 6" /></Icon>;
 const IconCheck = (p) => <Icon {...p} sw={2.2}><path d="M5 12l4 4 10-10" /></Icon>;
 const IconPlus = (p) => <Icon {...p} sw={2}><path d="M12 5v14M5 12h14" /></Icon>;
@@ -67,21 +63,6 @@ const TabIconUser = ({active}) => (
   </svg>
 );
 
-// ───────── TopBar — close variant ─────────
-function TopBar({ onClose }) {
-  return (
-    <div className="topbar">
-      <button className="topbar-close" onClick={onClose}>
-        <IconClose size={14} sw={2} />
-        <span>Закрыть</span>
-      </button>
-      <button className="topbar-more" aria-label="Ещё">
-        <IconDots size={18} />
-      </button>
-    </div>
-  );
-}
-
 // ───────── BottomNav ─────────
 function BottomNav({ active, onChange }) {
   const tabs = [
@@ -126,8 +107,8 @@ function AIOrb({ size = 96, animated = true }) {
 }
 
 Object.assign(window, {
-  Icon, IconClose, IconDots, IconChevR, IconCheck, IconPlus, IconPlay,
+  Icon, IconChevR, IconCheck, IconPlus, IconPlay,
   IconStar, IconLeaf, IconSun, IconMoon, IconBook2,
   TabIconHome, TabIconDoc, TabIconChat, TabIconBook, TabIconUser,
-  TopBar, BottomNav, ProgressRing, AIOrb,
+  BottomNav, ProgressRing, AIOrb,
 });

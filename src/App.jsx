@@ -48,7 +48,6 @@ function AppShell() {
   const [toast, setToast] = useState(null);
 
   const open = (id) => setToast('Открытие: ' + id);
-  const close = () => setToast('Закрытие окна');
 
   const active = pathToTabId(location.pathname);
 
@@ -57,12 +56,12 @@ function AppShell() {
       <div className="app-root">
         <div className="app-frame">
           <Routes>
-            <Route path="/" element={<HomeScreen onOpen={open} onClose={close} />} />
-            <Route path="/recommendations" element={<RecommendationsScreen onOpen={open} onClose={close} />} />
-            <Route path="/library" element={<LibraryScreen onOpen={open} onClose={close} />} />
-            <Route path="/docs" element={<PlaceholderScreen title="Документы" onClose={close} />} />
-            <Route path="/chat" element={<PlaceholderScreen title="Чат" onClose={close} />} />
-            <Route path="/profile" element={<PlaceholderScreen title="Профиль" onClose={close} />} />
+            <Route path="/" element={<HomeScreen onOpen={open} />} />
+            <Route path="/recommendations" element={<RecommendationsScreen onOpen={open} />} />
+            <Route path="/library" element={<LibraryScreen onOpen={open} />} />
+            <Route path="/docs" element={<PlaceholderScreen title="Документы" />} />
+            <Route path="/chat" element={<PlaceholderScreen title="Чат" />} />
+            <Route path="/profile" element={<PlaceholderScreen title="Профиль" />} />
           </Routes>
         </div>
         <BottomNav active={active} onNavigate={(path) => navigate(path)} />

@@ -1,6 +1,6 @@
 // Библиотека — Library
 
-function LibraryScreen({ onOpen, onClose }) {
+function LibraryScreen({ onOpen }) {
   const [tab, setTab] = useState('content');
 
   const items = [
@@ -13,7 +13,6 @@ function LibraryScreen({ onOpen, onClose }) {
 
   return (
     <div className="screen">
-      <TopBar onClose={onClose} />
       <div className="screen-scroll">
         <h1 className="t-h1 c-primary screen-title">Библиотека</h1>
 

@@ -25,18 +25,6 @@ export const Icon = ({
   </svg>
 );
 
-export const IconClose = (p) => (
-  <Icon {...p}>
-    <path d="M5 5l14 14M19 5L5 19" />
-  </Icon>
-);
-export const IconDots = (p) => (
-  <Icon {...p} fill="currentColor" stroke="none">
-    <circle cx="5" cy="12" r="1.7" />
-    <circle cx="12" cy="12" r="1.7" />
-    <circle cx="19" cy="12" r="1.7" />
-  </Icon>
-);
 export const IconChevR = (p) => (
   <Icon {...p}>
     <path d="M9 6l6 6-6 6" />
@@ -179,21 +167,6 @@ export const TabIconUser = ({ active }) => (
   </svg>
 );
 
-/** Верхняя панель — вариант «Закрыть» (как в модалке прототипа) */
-export function TopBar({ onClose }) {
-  return (
-    <div className="topbar">
-      <button type="button" className="topbar-close" onClick={onClose}>
-        <IconClose size={14} sw={2} />
-        <span>Закрыть</span>
-      </button>
-      <button type="button" className="topbar-more" aria-label="Ещё">
-        <IconDots size={18} />
-      </button>
-    </div>
-  );
-}
-
 /** Нижняя навигация: переход по path (React Router) */
 export function BottomNav({ active, onNavigate }) {
   const tabs = [
@@ -249,7 +222,7 @@ export function ProgressRing({
   );
 }
 
-/** AI Orb: заливка — текстура из /uploads + blur (см. .ai-orb__fill) */
+/** AI Orb: заливка — оригинальная текстура из /uploads (см. .ai-orb__fill) */
 export function AIOrb({ size = 96, animated = true }) {
   return (
     <div

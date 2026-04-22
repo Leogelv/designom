@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  TopBar,
-  IconCheck,
-  IconPlus,
-  IconChevR,
-} from './shared.jsx';
+import { IconCheck, IconPlus, IconChevR } from './shared.jsx';
 
 const GRAD_TILE_1 = '/uploads/grad11.png';
 const GRAD_TILE_2 = '/uploads/grad16_9.png';
 
-export default function HomeScreen({ onOpen, onClose }) {
+export default function HomeScreen({ onOpen }) {
   const [dinner, setDinner] = useState(false);
   const toggleDinner = (e) => {
     e.stopPropagation();
@@ -19,7 +14,6 @@ export default function HomeScreen({ onOpen, onClose }) {
 
   return (
     <div className="screen">
-      <TopBar onClose={onClose} />
       <div className="screen-scroll">
         <h1 className="t-h1 c-primary" style={{ margin: '0 0 var(--sp-2)' }}>
           Привет, Надежда!
@@ -45,7 +39,6 @@ export default function HomeScreen({ onOpen, onClose }) {
             }
             desc="Сейчас больше влияет стрессовая нагрузка"
             corner={<AvatarBadge />}
-            waves
           />
           <GradientTile
             imageUrl={GRAD_TILE_2}
@@ -57,7 +50,6 @@ export default function HomeScreen({ onOpen, onClose }) {
             }
             desc="Тебе остаться 380 баллов до успешного завершения уровня"
             corner={<RingBadge pct={52} />}
-            waves
           />
         </div>
 
@@ -141,8 +133,8 @@ export default function HomeScreen({ onOpen, onClose }) {
   );
 }
 
-/** Плашка метрики: фон — PNG из public/uploads + слой scrim (см. styles) */
-function GradientTile({ kicker, value, desc, corner, waves, imageUrl }) {
+/** Плашка метрики: фон — оригинальный PNG из public/uploads, без затемнения и волн */
+function GradientTile({ kicker, value, desc, corner, imageUrl }) {
   return (
     <div className="grad-tile">
       <div
@@ -150,13 +142,6 @@ function GradientTile({ kicker, value, desc, corner, waves, imageUrl }) {
         style={{ backgroundImage: `url(${imageUrl})` }}
         aria-hidden
       />
-      <div className="grad-tile__scrim" aria-hidden />
-      {waves && (
-        <svg className="grad-tile-waves" viewBox="0 0 170 50" preserveAspectRatio="none">
-          <path d="M0 32 Q30 22 60 30 T 120 32 T 200 28 L200 50 L0 50Z" fill="rgba(255,255,255,0.22)" />
-          <path d="M0 40 Q35 30 70 36 T 140 38 T 210 34 L210 50 L0 50Z" fill="rgba(255,255,255,0.30)" />
-        </svg>
-      )}
       <div className="grad-tile-top">
         <div className="grad-tile-kicker">{kicker}</div>
         {corner}

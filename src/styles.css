@@ -208,46 +208,10 @@ button {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0 var(--sp-5) 104px;
+  padding: max(12px, env(safe-area-inset-top, 0px) + 8px) var(--sp-5) 104px;
   -webkit-overflow-scrolling: touch;
 }
 .screen-scroll::-webkit-scrollbar { width: 0; }
-
-/* ── TopBar: close-modal variant (X Закрыть  •••) ── */
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 56px var(--sp-5) var(--sp-4);
-  flex-shrink: 0;
-}
-
-.topbar-close {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
-  height: 40px;
-  padding: 0 var(--sp-2);
-  font-family: var(--font-secondary);
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-primary);
-  transition: opacity var(--dur-fast) var(--ease-std);
-}
-.topbar-close:hover { opacity: 0.7; }
-.topbar-close svg { width: 14px; height: 14px; }
-
-.topbar-more {
-  width: 40px; height: 40px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  border-radius: var(--r-pill);
-  transition: background var(--dur-fast) var(--ease-std);
-}
-.topbar-more:hover { background: var(--bg-muted); }
 
 /* ── Screen title block ── */
 
@@ -289,23 +253,26 @@ button {
 .hero-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-floating); }
 .hero-card:active { transform: scale(0.99); }
 
-/* Фон героя — картинка из /uploads + лёгкий blur */
+/* Фон героя — картинка из /uploads без blur и без затемняющего scrim */
 .hero-card__media {
   position: absolute;
-  inset: -18px;
+  inset: 0;
   background-size: cover;
   background-position: center;
-  filter: blur(12px);
-  transform: scale(1.08);
   z-index: 0;
 }
 .hero-card__scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(24, 14, 46, 0.28);
+  background: transparent;
   pointer-events: none;
   border-radius: inherit;
+}
+/* Читабельность белого текста на ярком фото без тёмного оверлея */
+.hero-card--image .t-h3,
+.hero-card--image .t-body-sm {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.28), 0 0 18px rgba(0, 0, 0, 0.12);
 }
 .hero-card--image {
   background: var(--primary-900);
@@ -526,10 +493,8 @@ button {
 }
 .ai-orb__fill {
   position: absolute;
-  inset: -14px;
+  inset: 0;
   background: url(/uploads/grad11.png) center / cover no-repeat;
-  filter: blur(10px);
-  transform: scale(1.1);
   z-index: 0;
 }
 .ai-orb::before {
@@ -630,7 +595,7 @@ button {
 .section-gap-sm { margin-top: var(--sp-5); }
 
 /* ────────────────────────────────────────────────────────────
-   Метрики BioAge / Прогресс — фон из uploads/*.png + blur
+   Метрики BioAge / Прогресс — чёткое фото из uploads/*.png, без scrim и blur
    ──────────────────────────────────────────────────────────── */
 .grad-tile {
   position: relative;
@@ -647,18 +612,16 @@ button {
 }
 .grad-tile__media {
   position: absolute;
-  inset: -18px;
+  inset: 0;
   background-size: cover;
   background-position: center;
-  filter: blur(12px);
-  transform: scale(1.08);
   z-index: 0;
 }
 .grad-tile__scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(18, 10, 36, 0.3);
+  background: transparent;
   pointer-events: none;
 }
 .grad-tile-waves {
@@ -682,6 +645,7 @@ button {
   font-weight: 600;
   color: rgba(255,255,255,0.92);
   letter-spacing: -0.01em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 14px rgba(0, 0, 0, 0.12);
 }
 .grad-tile-badge {
   width: 26px; height: 26px;
@@ -690,6 +654,7 @@ button {
   border: 1px solid rgba(255,255,255,0.25);
   display: inline-flex; align-items: center; justify-content: center;
   color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 .grad-tile-value {
   position: relative;
@@ -700,6 +665,7 @@ button {
   line-height: 32px;
   letter-spacing: -0.02em;
   margin-top: 10px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.32), 0 0 16px rgba(0, 0, 0, 0.14);
 }
 .grad-tile-value span {
   font-family: var(--font-primary);
@@ -717,6 +683,7 @@ button {
   font-size: 11.5px;
   line-height: 15px;
   color: rgba(255,255,255,0.94);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
 }
 
 /* ────────────────────────────────────────────────────────────

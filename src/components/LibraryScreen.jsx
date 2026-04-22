@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { TopBar, IconChevR } from './shared.jsx';
+import { IconChevR } from './shared.jsx';
 
 const HERO_BG = '/uploads/grad16_9.png';
 
-export default function LibraryScreen({ onOpen, onClose }) {
+export default function LibraryScreen({ onOpen }) {
   const [tab, setTab] = useState('content');
 
   const items = [
@@ -16,7 +16,6 @@ export default function LibraryScreen({ onOpen, onClose }) {
 
   return (
     <div className="screen">
-      <TopBar onClose={onClose} />
       <div className="screen-scroll">
         <h1 className="t-h1 c-primary screen-title">Библиотека</h1>
 

@@ -839,8 +839,30 @@ button {
 }
 
 /* ────────────────────────────────────────────────────────────
-   Recommendations orb wrapper (bigger soft bg tint)
+   Медитация: PNG /uploads/medblob2.png в круге, без белой кромки (~3%)
+   Чат: фон кнопки микрофона — /uploads/medit_blob.png
    ──────────────────────────────────────────────────────────── */
+.medit-blob {
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f0eef6;
+  box-sizing: border-box;
+}
+.medit-blob__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  /* маска: центр 94% кадра (≈3% с каждого края) */
+  transform: scale(calc(1 / 0.94));
+  transform-origin: center;
+}
+
+/* обёртка для орба AI (рекомендации / др.) */
 .rec-orb {
   width: 62px; height: 62px;
   border-radius: 999px;
@@ -927,7 +949,7 @@ button {
   flex-direction: column;
 }
 
-/* Центр: градиентный микрофон + подсказка */
+/* Центр: круг с medit_blob + иконка микрофона + подсказка */
 .chat-symptom__center {
   flex: 1;
   min-height: 0;
@@ -947,10 +969,18 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--grad-brand);
+  overflow: hidden;
+  /* medit_blob: лёгкий зум, чтобы убрать белую кромку (~3%) */
+  background: #e8e0f0 url('/uploads/medit_blob.png') center / 108% 108% no-repeat;
   box-shadow: var(--shadow-floating);
   cursor: pointer;
   transition: transform var(--dur-base) var(--ease-std), box-shadow var(--dur-base) var(--ease-std);
+  position: relative;
+}
+.chat-symptom__mic svg {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
 }
 .chat-symptom__mic:hover {
   transform: scale(1.03);
@@ -1114,8 +1144,14 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--grad-brand);
+  overflow: hidden;
+  background: #e0d8f0 url('/uploads/medit_blob.png') center / 108% 108% no-repeat;
   box-shadow: 0 10px 28px rgba(203, 118, 222, 0.35);
+}
+.sa-orb__core svg {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.22));
 }
 
 .chat-symptom__steps {

@@ -266,6 +266,20 @@ export function AIOrb({ size = 96, animated = true }) {
   );
 }
 
+const MEDIT_CIRCLE_SRC = '/uploads/medblob2.png';
+
+/**
+ * Иллюстрация «Медитация» в карточке: PNG в круге.
+ * scale ~1/0.94 — обрезка ~3% кромки с каждой стороны (см. .medit-blob__img).
+ */
+export function MeditationBlob({ size = 58 }) {
+  return (
+    <div className="medit-blob" style={{ width: size, height: size }} aria-hidden>
+      <img className="medit-blob__img" src={MEDIT_CIRCLE_SRC} alt="" draggable={false} />
+    </div>
+  );
+}
+
 /** Кнопка-«пилюля» с фиолетовой стрелкой (дневник, динамика и т.д.) */
 export function PillAction({ label, onClick }) {
   return (

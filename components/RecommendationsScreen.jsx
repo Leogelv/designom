@@ -30,7 +30,7 @@ function RecommendationsScreen({ onOpen }) {
         <div className="card tappable section-gap" style={{ padding: 'var(--sp-4)' }}
              onClick={() => onOpen('meditation')}>
           <div className="flex items-center" style={{ gap: 'var(--sp-4)' }}>
-            <div className="rec-orb"><AIOrb size={58} animated={false} /></div>
+            <MeditationBlob size={58} />
             <div className="flex-1 min-w-0">
               <div className="t-title-lg c-primary">Медитация</div>
               <div className="t-body-md c-brand" style={{ fontWeight: 600, marginTop: 2 }}>20 баллов</div>

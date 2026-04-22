@@ -106,9 +106,18 @@ function AIOrb({ size = 96, animated = true }) {
   return <div className={'ai-orb ' + (animated ? 'animated' : '')} style={{ width: size, height: size }} aria-hidden="true" />;
 }
 
+const MEDIT_CIRCLE_SRC = '/uploads/medblob2.png';
+function MeditationBlob({ size = 58 }) {
+  return (
+    <div className="medit-blob" style={{ width: size, height: size }} aria-hidden>
+      <img className="medit-blob__img" src={MEDIT_CIRCLE_SRC} alt="" draggable={false} />
+    </div>
+  );
+}
+
 Object.assign(window, {
   Icon, IconChevR, IconCheck, IconPlus, IconPlay,
   IconStar, IconLeaf, IconSun, IconMoon, IconBook2,
   TabIconHome, TabIconDoc, TabIconChat, TabIconBook, TabIconUser,
-  BottomNav, ProgressRing, AIOrb,
+  BottomNav, ProgressRing, AIOrb, MeditationBlob,
 });

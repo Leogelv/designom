@@ -1,5 +1,5 @@
 import React, { useId } from 'react';
-import { IconChevR, AIOrb, PillAction } from './shared.jsx';
+import { IconChevR, PillAction, MeditationBlob } from './shared.jsx';
 
 /**
  * Блок «Рекомендации» — вставляется в конец скролла главной.
@@ -38,9 +38,7 @@ export default function RecommendationsSection({ onOpen }) {
         onClick={() => onOpen('meditation')}
       >
         <div className="flex items-center" style={{ gap: 'var(--sp-4)' }}>
-          <div className="rec-orb">
-            <AIOrb size={58} animated={false} />
-          </div>
+          <MeditationBlob size={58} />
           <div className="flex-1 min-w-0">
             <div className="t-title-lg c-primary">Медитация</div>
             <div className="t-body-md c-brand" style={{ fontWeight: 600, marginTop: 2 }}>

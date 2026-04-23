@@ -88,7 +88,7 @@ export default function LibraryScreen({ onOpen }) {
             <div key={it.id} className="action-row" onClick={() => onOpen('article-' + it.id)}>
               <LibThumb kind={it.thumb} />
               <div className="row-body">
-                <div className="t-title-md c-primary">{it.title}</div>
+                <div className="t-card-title c-primary">{it.title}</div>
                 <div className="t-label-md c-tertiary" style={{ marginTop: 2 }}>
                   {it.dur}
                 </div>

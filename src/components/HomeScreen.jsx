@@ -70,7 +70,7 @@ export default function HomeScreen({ onOpen }) {
                 <div className="icon-square">
                   <IconFork size={20} />
                 </div>
-                <div className="t-title-md c-primary">Дневник питания</div>
+                <div className="t-card-title c-primary">Дневник питания</div>
               </div>
 
               <div style={{ padding: '0 var(--card-pad) var(--sp-2)' }}>
@@ -93,12 +93,10 @@ export default function HomeScreen({ onOpen }) {
                 </div>
                 <div className="card-row__body">
                   <div className="flex items-center justify-between" style={{ gap: 'var(--sp-2)' }}>
-                    <div className="t-title-md c-primary">Утренний чекап</div>
+                    <div className="t-card-title c-primary">Утренний чекап</div>
                     <span className="tag-done">Выполнено</span>
                   </div>
-                  <div className="t-label-md c-brand mt-stack-tight" style={{ fontWeight: 600 }}>
-                    50 баллов
-                  </div>
+                  <div className="t-card-points mt-stack-tight">50 баллов</div>
                   <div className="t-body-sm c-secondary mt-stack-text">
                     Сегодня лучше обойтись без высокой нагрузки или «день обещает быть бодрым»!
                   </div>
@@ -115,12 +113,10 @@ export default function HomeScreen({ onOpen }) {
                 </div>
                 <div className="card-row__body">
                   <div className="flex items-center justify-between" style={{ gap: 'var(--sp-2)' }}>
-                    <div className="t-title-md c-primary">Вечерний чекап</div>
+                    <div className="t-card-title c-primary">Вечерний чекап</div>
                     <span className="tag-done">Выполнено</span>
                   </div>
-                  <div className="t-label-md c-brand mt-stack-tight" style={{ fontWeight: 600 }}>
-                    50 баллов
-                  </div>
+                  <div className="t-card-points mt-stack-tight">50 баллов</div>
                   <div className="t-body-sm c-secondary mt-stack-text">
                     День был напряжённым, можно завершить его короткой практикой на 5 минут.
                   </div>
@@ -260,7 +256,7 @@ function MealRow({ label, pts, done, onToggle, last }) {
         </button>
       )}
       <div className="t-body-md c-primary flex-1">{label}</div>
-      <div className="t-label-md c-tertiary">20 баллов</div>
+      <div className="t-card-points t-card-points--muted">20 баллов</div>
     </div>
   );
 }

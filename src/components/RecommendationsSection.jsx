@@ -47,10 +47,8 @@ export default function RecommendationsSection({ onOpen }) {
               <MeditationBlob size={58} />
             </div>
             <div className="card-row__body">
-              <div className="t-title-lg c-primary">Медитация</div>
-              <div className="t-body-md c-brand mt-stack-tight" style={{ fontWeight: 600 }}>
-                20 баллов
-              </div>
+              <div className="t-card-title c-primary">Медитация</div>
+              <div className="t-card-points mt-stack-tight">20 баллов</div>
               <div className="t-body-sm c-tertiary mt-stack-text">Аудио-практика · 10 минут</div>
             </div>
             <div className="card-row__tail">
@@ -73,7 +71,7 @@ export default function RecommendationsSection({ onOpen }) {
             </div>
             <div className="card-row__body">
               <div className="t-label-md c-tertiary">Материал дня</div>
-              <div className="t-title-md c-primary mt-stack-tight">
+              <div className="t-card-title c-primary mt-stack-tight">
                 Как питание влияет на
                 <br />
                 организм и возраст
@@ -96,7 +94,7 @@ export default function RecommendationsSection({ onOpen }) {
           style={{ position: 'relative', overflow: 'hidden' }}
           onClick={() => onOpen('dynamics')}
         >
-          <div className="t-title-lg c-primary">Динамика</div>
+          <div className="t-card-title c-primary">Динамика</div>
           <div className="t-body-md c-secondary mt-stack-text">
             Ознакомься со своей динамикой сна, стресса и питания за неделю.
           </div>

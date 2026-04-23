@@ -2,140 +2,10 @@
    Mediora AI Health — Design Tokens v1.0.0
    Calm medical clarity, soft premium minimalism.
    All values come from the design system spec.
+   Токены :root — public/ds-tokens.css (и в index.html для сплэша до бандла).
    ──────────────────────────────────────────────────────────── */
 
-:root {
-  /* ── Backgrounds ── */
-  --bg-app: #F6F4F8;
-  --bg-app-alt: #F8F7FB;
-  --bg-elevated: #FFFFFF;
-  --bg-muted: #F1EDF5;
-  --bg-soft-tint: #F3EEFA;
-
-  /* ── Text ── */
-  --text-primary: #1F1C2A;
-  --text-secondary: #5F5A6B;
-  --text-tertiary: #8B8698;
-  --text-inverse: #FFFFFF;
-  --text-link: #7B57F6;
-
-  /* ── Primary (purple) ── */
-  --primary-50: #F4EEFF;
-  --primary-100: #E9DDFF;
-  --primary-200: #D8C2FF;
-  --primary-300: #C09EFF;
-  --primary-400: #A57EFA;
-  --primary-500: #8E63F8;
-  --primary-600: #7B57F6;
-  --primary-700: #6A49E8;
-  --primary-800: #583BC8;
-  --primary-900: #452E9A;
-
-  /* ── Secondary lavenders ── */
-  --lavender-1: #EDE3FF;
-  --lavender-2: #E7DAFF;
-  --lavender-3: #DCCBFF;
-
-  /* ── Accents ── */
-  --accent-pink: #F86FA9;
-  --accent-coral: #FF8A7A;
-  --accent-peach: #FFB197;
-  --accent-blue: #9DB8FF;
-  --accent-violet: #B993FF;
-
-  /* ── Semantic ── */
-  --success: #5DBB7B;
-  --success-soft: #E8F7EC;
-  --warning: #F2A94A;
-  --warning-soft: #FFF2DF;
-  --error: #E96B6B;
-  --error-soft: #FFE8E8;
-  --info: #6FA3F7;
-  --info-soft: #EAF3FF;
-
-  /* ── Borders ── */
-  --border-subtle: #ECE7F2;
-  --border-default: #DED7E8;
-  --border-strong: #CFC6DD;
-
-  /* ── Brand gradient palette (5-stop) ── */
-  --grad-stop-1: #EB74AA;  /* rose */
-  --grad-stop-2: #FD897A;  /* coral */
-  --grad-stop-3: #FFB2A5;  /* peach */
-  --grad-stop-4: #F7A2C9;  /* pink */
-  --grad-stop-5: #CB76DE;  /* orchid */
-
-  --grad-brand: linear-gradient(135deg,
-    #EB74AA 0%,
-    #FD897A 28%,
-    #FFB2A5 52%,
-    #F7A2C9 76%,
-    #CB76DE 100%);
-  --grad-hero-main: linear-gradient(135deg, #FF8E9E 0%, #F57BC8 50%, #B887FF 100%);
-  --grad-hero-soft: linear-gradient(135deg, #FFD6E2 0%, #E8D8FF 50%, #DDE5FF 100%);
-  --grad-orb: radial-gradient(circle at 32% 30%, #FF9AC0 0%, #C79BFF 50%, #9CB7FF 100%);
-  --grad-protocol: linear-gradient(135deg, #F78DA7 0%, #D8A0FF 100%);
-  --grad-warm-metric: linear-gradient(135deg, #FF9B8E 0%, #F58BC8 50%, #C99DFF 100%);
-
-  /* ── Radii ── */
-  --r-xs: 10px;
-  --r-sm: 12px;
-  /* Плашки CTA, сегменты: единый радиус дизайн-системы */
-  --r-control: 12px;
-  --r-md: 16px;
-  --r-lg: 20px;
-  --r-xl: 24px;
-  --r-xxl: 28px;
-  --r-card: 24px;
-  --r-hero-card: 28px;
-  --r-pill: 9999px;
-  --r-input: 16px;
-
-  /* ── Spacing (4px scale) ── */
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 20px;
-  --sp-6: 24px;
-  --sp-7: 28px;
-  --sp-8: 32px;
-  --sp-10: 40px;
-  --sp-12: 48px;
-  --sp-14: 56px;
-  --sp-16: 64px;
-
-  /* Карточки / списки на главной: единые отступы (не мешаем .hero-card / library) */
-  --card-pad: var(--sp-4);
-  /* гориз. зазор «иконка / орб → текст»; вертикальные стыки между соседними карточками */
-  --card-row-gap: var(--sp-3);
-  --list-gap: var(--sp-3);
-  /* колонка под ведущий визуал — текст начинается в одной вертикали (орб 58, иконки — по центру) */
-  --card-lead: 58px;
-  /* вертикальные зазоры внутри текста в карточке */
-  --stack-tight: var(--sp-1);
-  --stack-text: var(--sp-2);
-  --stack-block: var(--sp-3);
-  /* подзаголовок секции к первой карточке */
-  --section-title-gap: var(--sp-3);
-
-  /* ── Shadows ── */
-  --shadow-card: 0 6px 24px rgba(87, 61, 145, 0.06);
-  --shadow-card-soft: 0 4px 18px rgba(87, 61, 145, 0.04);
-  --shadow-button: 0 8px 20px rgba(123, 87, 246, 0.18);
-  --shadow-floating: 0 16px 40px rgba(123, 87, 246, 0.16);
-
-  /* ── Motion ── */
-  --dur-fast: 120ms;
-  --dur-base: 180ms;
-  --dur-slow: 280ms;
-  --ease-std: cubic-bezier(0.2, 0, 0, 1);
-  --ease-emph: cubic-bezier(0.2, 0, 0, 1.2);
-
-  /* ── Fonts ── */
-  --font-primary: "SF Pro Display", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-secondary: "SF Pro Text", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
+@import url('/ds-tokens.css');
 
 /* ────────────────────────────────────────────────────────────
    Base
@@ -268,6 +138,22 @@ button {
   box-shadow: var(--shadow-card-soft);
   transition: box-shadow var(--dur-base) var(--ease-std), transform var(--dur-base) var(--ease-std);
 }
+/* Внутренний стек: только var(--stack-*), без inline-отступов */
+.card__stack {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+/* Вылет на края карточки (графики) — единая формула с --card-pad */
+.card__bleed-x {
+  margin-left: calc(-1 * var(--card-pad));
+  margin-right: calc(-1 * var(--card-pad));
+  width: calc(100% + 2 * var(--card-pad));
+  max-width: none;
+  box-sizing: border-box;
+}
+.card--dynamics { overflow: hidden; }
 .card.tappable { cursor: pointer; }
 .card.tappable:hover {
   box-shadow: var(--shadow-card);
@@ -718,14 +604,15 @@ button {
   margin-top: calc(var(--sp-6) - var(--list-gap));
 }
 
-/* Строка внутри карточки: фикс. колонка --card-lead, текст в одной вертикали */
+/* Строка в карточке: lead + body; иконка/орб вертикально по центру относительно текста */
 .card-row {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--card-row-gap);
   width: 100%;
   box-sizing: border-box;
 }
+/* Синоним: то же выравнивание (исторически) */
 .card-row--center {
   align-items: center;
 }
@@ -810,7 +697,7 @@ button {
 }
 .grad-tile-badge {
   width: 26px; height: 26px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   background: rgba(255,255,255,0.22);
   border: 1px solid rgba(255,255,255,0.25);
   display: inline-flex; align-items: center; justify-content: center;
@@ -908,7 +795,7 @@ button {
    ──────────────────────────────────────────────────────────── */
 .icon-square {
   width: 44px; height: 44px;
-  border-radius: 12px;
+  border-radius: var(--r-control);
   background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   color: var(--primary-600);
@@ -939,7 +826,7 @@ button {
 
 .chip-check-sm {
   width: 20px; height: 20px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   border: 1.6px solid var(--success);
   color: var(--success);
   background: white;
@@ -948,7 +835,7 @@ button {
 }
 .chip-plus-sm {
   width: 20px; height: 20px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   border: 1.6px solid var(--primary-500);
   color: var(--primary-600);
   background: white;
@@ -1011,7 +898,7 @@ button {
   align-items: center;
   height: 22px;
   padding: 0 10px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   background: var(--success-soft);
   color: var(--success);
   font-family: var(--font-secondary);
@@ -1050,7 +937,7 @@ button {
 /* обёртка для орба AI (рекомендации / др.) */
 .rec-orb {
   width: 62px; height: 62px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1061,7 +948,7 @@ button {
 /* Small right-side arrow chip */
 .arrow-chip {
   width: 34px; height: 34px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   background: white;
   border: 1.5px solid var(--primary-300);
   color: var(--primary-600);

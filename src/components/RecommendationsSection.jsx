@@ -15,7 +15,7 @@ export default function RecommendationsSection({ onOpen }) {
 
       <div className="list-cards list-cards--rec">
         <div className="card tappable" onClick={() => onOpen('attention')}>
-          <div className="card-row card-row--center">
+          <div className="card-row">
             <div className="card-row__lead">
               <IconSparkle size={26} />
             </div>
@@ -28,7 +28,7 @@ export default function RecommendationsSection({ onOpen }) {
         </div>
 
         <div className="card tappable" onClick={() => onOpen('today-load')}>
-          <div className="card-row card-row--center">
+          <div className="card-row">
             <div className="card-row__lead">
               <IconSparkle size={26} />
             </div>
@@ -89,29 +89,21 @@ export default function RecommendationsSection({ onOpen }) {
           </div>
         </div>
 
-        <div
-          className="card tappable"
-          style={{ position: 'relative', overflow: 'hidden' }}
-          onClick={() => onOpen('dynamics')}
-        >
-          <div className="t-card-title c-primary">Динамика</div>
-          <div className="t-body-md c-secondary mt-stack-text">
-            Ознакомься со своей динамикой сна, стресса и питания за неделю.
-          </div>
-          <div
-            className="dynamics-card__chart"
-            style={{
-              position: 'relative',
-              height: 72,
-              marginTop: 'var(--stack-block)',
-              marginLeft: 'calc(-1 * var(--card-pad))',
-              marginRight: 'calc(-1 * var(--card-pad))',
-            }}
-          >
-            <DynamicsWave />
-          </div>
-          <div className="mt-stack-block" style={{ position: 'relative' }}>
-            <PillAction label="Перейти к динамике" onClick={() => onOpen('dynamics')} />
+        <div className="card tappable card--dynamics" onClick={() => onOpen('dynamics')}>
+          <div className="card__stack">
+            <div className="t-card-title c-primary">Динамика</div>
+            <div className="t-body-md c-secondary mt-stack-text">
+              Ознакомься со своей динамикой сна, стресса и питания за неделю.
+            </div>
+            <div
+              className="dynamics-card__chart card__bleed-x"
+              style={{ position: 'relative', height: 72, marginTop: 'var(--stack-block)' }}
+            >
+              <DynamicsWave />
+            </div>
+            <div className="mt-stack-block" style={{ position: 'relative' }}>
+              <PillAction label="Перейти к динамике" onClick={() => onOpen('dynamics')} />
+            </div>
           </div>
         </div>
       </div>

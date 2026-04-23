@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { IconCheck, IconPlus, PillAction } from './shared.jsx';
+import { IconCheck, IconPlus } from './shared.jsx';
+import { Card, CardRow, CardStack, PillAction, Screen, ScreenScroll, TagDone } from './ui/index.js';
 import RecommendationsSection from './RecommendationsSection.jsx';
 
 const GRAD_TILE_1 = '/uploads/grad11.png';
@@ -13,8 +14,8 @@ export default function HomeScreen({ onOpen }) {
   };
 
   return (
-    <div className="screen">
-      <div className="screen-scroll">
+    <Screen>
+      <ScreenScroll>
         <h1 className="t-h1 c-primary" style={{ margin: '0 0 var(--sp-2)' }}>
           Привет, Надежда!
         </h1>
@@ -62,7 +63,7 @@ export default function HomeScreen({ onOpen }) {
           </div>
 
           <div className="list-cards">
-            <div className="card" style={{ padding: 0, cursor: 'default' }}>
+            <Card style={{ padding: 0 }}>
               <div
                 className="flex items-center"
                 style={{ gap: 'var(--card-row-gap)', padding: 'var(--card-pad) var(--card-pad) var(--sp-3)' }}
@@ -82,53 +83,43 @@ export default function HomeScreen({ onOpen }) {
               <div style={{ padding: '0 var(--card-pad) var(--card-pad)' }}>
                 <PillAction label="Перейти в дневник питания" onClick={() => onOpen('food-diary')} />
               </div>
-            </div>
+            </Card>
 
-            <div className="card tappable" onClick={() => onOpen('checkin-morning')}>
-              <div className="card-row">
-                <div className="card-row__lead">
-                  <div className="icon-square tint-peach">
-                    <IconSunFlat size={24} />
-                  </div>
-                </div>
-                <div className="card-row__body">
+            <Card tappable onClick={() => onOpen('checkin-morning')}>
+              <CardRow lead={<div className="icon-square tint-peach"><IconSunFlat size={24} /></div>}>
+                <CardStack>
                   <div className="flex items-center justify-between" style={{ gap: 'var(--sp-2)' }}>
                     <div className="t-card-title c-primary">Утренний чекап</div>
-                    <span className="tag-done">Выполнено</span>
+                    <TagDone />
                   </div>
                   <div className="t-card-points mt-stack-tight">50 баллов</div>
                   <div className="t-body-sm c-secondary mt-stack-text">
                     Сегодня лучше обойтись без высокой нагрузки или «день обещает быть бодрым»!
                   </div>
-                </div>
-              </div>
-            </div>
+                </CardStack>
+              </CardRow>
+            </Card>
 
-            <div className="card tappable" onClick={() => onOpen('checkin-evening')}>
-              <div className="card-row">
-                <div className="card-row__lead">
-                  <div className="icon-square tint-lavender">
-                    <IconMoonFlat size={24} />
-                  </div>
-                </div>
-                <div className="card-row__body">
+            <Card tappable onClick={() => onOpen('checkin-evening')}>
+              <CardRow lead={<div className="icon-square tint-lavender"><IconMoonFlat size={24} /></div>}>
+                <CardStack>
                   <div className="flex items-center justify-between" style={{ gap: 'var(--sp-2)' }}>
                     <div className="t-card-title c-primary">Вечерний чекап</div>
-                    <span className="tag-done">Выполнено</span>
+                    <TagDone />
                   </div>
                   <div className="t-card-points mt-stack-tight">50 баллов</div>
                   <div className="t-body-sm c-secondary mt-stack-text">
                     День был напряжённым, можно завершить его короткой практикой на 5 минут.
                   </div>
-                </div>
-              </div>
-            </div>
+                </CardStack>
+              </CardRow>
+            </Card>
           </div>
         </div>
 
         <RecommendationsSection onOpen={onOpen} />
-      </div>
-    </div>
+      </ScreenScroll>
+    </Screen>
   );
 }
 

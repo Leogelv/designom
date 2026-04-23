@@ -259,7 +259,7 @@ button {
 }
 
 /* ────────────────────────────────────────────────────────────
-   Buttons
+   Buttons — все размеры/радиусы из ds-tokens.css (--btn-*)
    ──────────────────────────────────────────────────────────── */
 
 .btn-primary {
@@ -267,9 +267,9 @@ button {
   align-items: center;
   justify-content: center;
   gap: var(--sp-2);
-  height: 52px;
-  padding: 0 var(--sp-5);
-  border-radius: var(--r-control);
+  height: var(--btn-height-lg);
+  padding: 0 var(--btn-padding-x);
+  border-radius: var(--btn-radius);
   background: var(--primary-600);
   color: var(--text-inverse);
   font-family: var(--font-primary);
@@ -288,9 +288,9 @@ button {
   align-items: center;
   justify-content: center;
   gap: var(--sp-2);
-  height: 48px;
-  padding: 0 var(--sp-5);
-  border-radius: var(--r-control);
+  height: var(--btn-height-md);
+  padding: 0 var(--btn-padding-x);
+  border-radius: var(--btn-radius);
   background: var(--lavender-1);
   color: var(--primary-600);
   font-family: var(--font-primary);
@@ -304,7 +304,7 @@ button {
 .btn-full { width: 100%; }
 
 .icon-btn {
-  width: 40px; height: 40px;
+  width: var(--btn-icon-md); height: var(--btn-icon-md);
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -318,8 +318,8 @@ button {
 .icon-btn:hover { background: var(--bg-muted); }
 .icon-btn:active { transform: scale(0.96); }
 
-.icon-btn.size-sm { width: 32px; height: 32px; }
-.icon-btn.size-lg { width: 44px; height: 44px; }
+.icon-btn.size-sm { width: var(--btn-icon-sm); height: var(--btn-icon-sm); }
+.icon-btn.size-lg { width: var(--btn-icon-lg); height: var(--btn-icon-lg); }
 
 /* Circular check / plus chip */
 .chip-check {
@@ -540,7 +540,7 @@ button {
   /* воздушнее, чем сплошной --bg-elevated */
   background: rgba(123, 87, 246, 0.05);
   border: 1px solid rgba(123, 87, 246, 0.14);
-  border-radius: var(--r-control);
+  border-radius: var(--btn-radius);
   padding: 3px;
   gap: 2px;
   width: 100%;
@@ -549,8 +549,8 @@ button {
 }
 .segmented button {
   flex: 1;
-  height: 36px;
-  border-radius: var(--r-control);
+  height: var(--btn-height-sm);
+  border-radius: var(--btn-radius);
   font-family: var(--font-secondary);
   font-size: 13px;
   font-weight: 600;
@@ -855,10 +855,10 @@ button {
   justify-content: space-between;
   gap: var(--sp-2);
   width: 100%;
-  min-height: 48px;
+  min-height: var(--btn-height-md);
   /* справа запас от края, чтобы круг со стрелкой не кропался на iOS */
-  padding: 6px 10px 6px var(--sp-5);
-  border-radius: var(--r-control);
+  padding: 6px 10px 6px var(--btn-padding-x);
+  border-radius: var(--btn-radius);
   background: rgba(123, 87, 246, 0.05);
   border: 1px solid rgba(123, 87, 246, 0.15);
   box-sizing: border-box;
@@ -993,8 +993,8 @@ button {
 }
 
 .chat-symptom__icon-btn {
-  width: 40px;
-  height: 40px;
+  width: var(--btn-icon-md);
+  height: var(--btn-icon-md);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1145,8 +1145,8 @@ button {
 
 .chat-symptom__send {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: var(--btn-icon-md);
+  height: var(--btn-icon-md);
   border-radius: 50%;
   display: flex;
   align-items: center;

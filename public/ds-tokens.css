@@ -124,7 +124,21 @@
   --font-primary: "SF Pro Display", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-secondary: "SF Pro Text", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Широкие CTA (сплэш, полноширинные) — высота/гориз. отступы */
-  --btn-cta-min-height: 48px;
-  --btn-cta-padding-x: var(--sp-5);
+  /* ── Buttons (единый источник для всех кнопок приложения) ── */
+  /* Радиус: один на все прямоугольные/пилюлеобразные кнопки; круглые — 50% */
+  --btn-radius: 12px;
+
+  /* Высота кнопок: sm=сегменты/тэги-кнопки, md=стандарт, lg=основной CTA */
+  --btn-height-sm: 36px;
+  --btn-height-md: 48px;
+  --btn-height-lg: 52px;
+
+  /* Горизонтальные отступы текстовых кнопок */
+  --btn-padding-x: var(--sp-5);
+  --btn-padding-x-sm: var(--sp-4);
+
+  /* Размеры круглых icon-кнопок (их border-radius всегда 50%) */
+  --btn-icon-sm: 32px;
+  --btn-icon-md: 40px;
+  --btn-icon-lg: 44px;
 }

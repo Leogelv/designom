@@ -115,14 +115,14 @@
   max-width: 36ch;
 }
 
-/* Кнопка: --r-control — как .pill-action */
+/* Кнопка: единые токены кнопок из ds-tokens.css */
 #app-splash__start,
 .app-splash__start {
   width: 100%;
-  min-height: var(--btn-cta-min-height, 48px);
-  padding: 0 var(--btn-cta-padding-x, 20px);
+  min-height: var(--btn-height-md, 48px);
+  padding: 0 var(--btn-padding-x, 20px);
   border: none;
-  border-radius: var(--r-control, 12px);
+  border-radius: var(--btn-radius, 12px);
   background: #fff;
   color: #d9469f;
   font-size: 17px;

@@ -1,5 +1,6 @@
 import React, { useId } from 'react';
-import { IconChevR, PillAction, MeditationBlob } from './shared.jsx';
+import { IconChevR, MeditationBlob } from './shared.jsx';
+import { Card, CardRow, CardStack, CardBleedX, PillAction } from './ui/index.js';
 
 /**
  * Блок «Рекомендации» — вставляется в конец скролла главной.
@@ -14,98 +15,63 @@ export default function RecommendationsSection({ onOpen }) {
       </h1>
 
       <div className="list-cards list-cards--rec">
-        <div className="card tappable" onClick={() => onOpen('attention')}>
-          <div className="card-row">
-            <div className="card-row__lead">
-              <IconSparkle size={26} />
+        <Card tappable onClick={() => onOpen('attention')}>
+          <CardRow lead={<IconSparkle size={26} />}>
+            <div className="t-body-md c-secondary">
+              Ваша зона внимания на этом уровне — снижение стресса и поддержка нутриентами.
             </div>
-            <div className="card-row__body">
-              <div className="t-body-md c-secondary">
-                Ваша зона внимания на этом уровне — снижение стресса и поддержка нутриентами.
-              </div>
-            </div>
-          </div>
-        </div>
+          </CardRow>
+        </Card>
 
-        <div className="card tappable" onClick={() => onOpen('today-load')}>
-          <div className="card-row">
-            <div className="card-row__lead">
-              <IconSparkle size={26} />
-            </div>
-            <div className="card-row__body">
-              <div className="t-body-md c-secondary">Сегодня лучше обойтись без высокой нагрузки.</div>
-            </div>
-          </div>
-        </div>
+        <Card tappable onClick={() => onOpen('today-load')}>
+          <CardRow lead={<IconSparkle size={26} />}>
+            <div className="t-body-md c-secondary">Сегодня лучше обойтись без высокой нагрузки.</div>
+          </CardRow>
+        </Card>
 
-        <div
-          className="card tappable u-before-section"
-          onClick={() => onOpen('meditation')}
-        >
-          <div className="card-row">
-            <div className="card-row__lead">
-              <MeditationBlob size={58} />
-            </div>
-            <div className="card-row__body">
-              <div className="t-card-title c-primary">Медитация</div>
-              <div className="t-card-points mt-stack-tight">20 баллов</div>
-              <div className="t-body-sm c-tertiary mt-stack-text">Аудио-практика · 10 минут</div>
-            </div>
-            <div className="card-row__tail">
-              <ArrowChip
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onOpen('meditation');
-                }}
-              />
-            </div>
-          </div>
-        </div>
+        <Card tappable className="u-before-section" onClick={() => onOpen('meditation')}>
+          <CardRow
+            lead={<MeditationBlob size={58} />}
+            tail={<ArrowChip onClick={(e) => { e.stopPropagation(); onOpen('meditation'); }} />}
+          >
+            <div className="t-card-title c-primary">Медитация</div>
+            <div className="t-card-points mt-stack-tight">20 баллов</div>
+            <div className="t-body-sm c-tertiary mt-stack-text">Аудио-практика · 10 минут</div>
+          </CardRow>
+        </Card>
 
-        <div className="card tappable" onClick={() => onOpen('material')}>
-          <div className="card-row">
-            <div className="card-row__lead">
-              <div className="icon-square tint-pink">
-                <IconOpenBook size={22} />
-              </div>
+        <Card tappable onClick={() => onOpen('material')}>
+          <CardRow
+            lead={<div className="icon-square tint-pink"><IconOpenBook size={22} /></div>}
+            tail={<ArrowChip onClick={(e) => { e.stopPropagation(); onOpen('material'); }} />}
+          >
+            <div className="t-label-md c-tertiary">Материал дня</div>
+            <div className="t-card-title c-primary mt-stack-tight">
+              Как питание влияет на
+              <br />
+              организм и возраст
             </div>
-            <div className="card-row__body">
-              <div className="t-label-md c-tertiary">Материал дня</div>
-              <div className="t-card-title c-primary mt-stack-tight">
-                Как питание влияет на
-                <br />
-                организм и возраст
-              </div>
-              <div className="t-body-sm c-tertiary mt-stack-text">6 минут</div>
-            </div>
-            <div className="card-row__tail">
-              <ArrowChip
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onOpen('material');
-                }}
-              />
-            </div>
-          </div>
-        </div>
+            <div className="t-body-sm c-tertiary mt-stack-text">6 минут</div>
+          </CardRow>
+        </Card>
 
-        <div className="card tappable card--dynamics" onClick={() => onOpen('dynamics')}>
-          <div className="card__stack">
+        <Card tappable className="card--dynamics" onClick={() => onOpen('dynamics')}>
+          <CardStack>
             <div className="t-card-title c-primary">Динамика</div>
             <div className="t-body-md c-secondary mt-stack-text">
               Ознакомься со своей динамикой сна, стресса и питания за неделю.
             </div>
-            <div
-              className="dynamics-card__chart card__bleed-x"
+            <CardBleedX
+              className="dynamics-card__chart"
               style={{ position: 'relative', height: 72, marginTop: 'var(--stack-block)' }}
             >
               <DynamicsWave />
-            </div>
+            </CardBleedX>
             <div className="mt-stack-block" style={{ position: 'relative' }}>
               <PillAction label="Перейти к динамике" onClick={() => onOpen('dynamics')} />
             </div>
-          </div>
-        </div>
+          </CardStack>
+        </Card>
       </div>
     </section>
   );

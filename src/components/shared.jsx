@@ -252,14 +252,5 @@ export function MeditationBlob({ size = 58 }) {
   );
 }
 
-/** Кнопка-«пилюля» с фиолетовой стрелкой (дневник, динамика и т.д.) */
-export function PillAction({ label, onClick }) {
-  return (
-    <button type="button" className="pill-action" onClick={onClick}>
-      <span className="pill-action-label">{label}</span>
-      <span className="pill-action-chip">
-        <IconChevR size={14} sw={2.3} />
-      </span>
-    </button>
-  );
-}
+/** Реэкспорт из UI-комплекта (для совместимости старых импортов) */
+export { default as PillAction } from './ui/PillAction.jsx';

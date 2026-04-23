@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IconChevR } from './shared.jsx';
+import { IconButton, Screen, ScreenScroll, Segmented, Stack, Tag } from './ui/index.js';
 
 const HERO_BG = '/uploads/grad16_9.png';
 
@@ -15,8 +16,8 @@ export default function LibraryScreen({ onOpen }) {
   ];
 
   return (
-    <div className="screen">
-      <div className="screen-scroll">
+    <Screen>
+      <ScreenScroll>
         <h1 className="t-h1 c-primary screen-title">Библиотека</h1>
 
         <div
@@ -31,8 +32,7 @@ export default function LibraryScreen({ onOpen }) {
           />
           <div className="hero-card__scrim" aria-hidden />
           <div className="library-hero__inner">
-            <div
-              className="tag"
+            <Tag
               style={{
                 alignSelf: 'flex-start',
                 background: 'rgba(255,255,255,0.28)',
@@ -41,7 +41,7 @@ export default function LibraryScreen({ onOpen }) {
               }}
             >
               Материал дня
-            </div>
+            </Tag>
             <div className="library-hero__lower">
               <div className="t-h3 c-inverse library-hero__title">
                 Как питание влияет
@@ -52,38 +52,32 @@ export default function LibraryScreen({ onOpen }) {
                 <div className="t-body-sm c-inverse" style={{ opacity: 0.92 }}>
                   6 минут
                 </div>
-                <button
-                  type="button"
-                  className="icon-btn"
-                  aria-label="Открыть"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onOpen('material');
-                  }}
+                <IconButton
+                  label="Открыть"
+                  onClick={(e) => { e.stopPropagation(); onOpen('material'); }}
                   style={{ background: 'white', color: 'var(--primary-600)' }}
                 >
                   <IconChevR size={16} sw={2.2} />
-                </button>
+                </IconButton>
               </div>
             </div>
           </div>
         </div>
 
         <div className="section-gap-sm">
-          <div className="segmented">
-            <button type="button" className={tab === 'practice' ? 'active' : ''} onClick={() => setTab('practice')}>
-              Практики
-            </button>
-            <button type="button" className={tab === 'breath' ? 'active' : ''} onClick={() => setTab('breath')}>
-              Дыхание
-            </button>
-            <button type="button" className={tab === 'content' ? 'active' : ''} onClick={() => setTab('content')}>
-              Контент
-            </button>
-          </div>
+          <Segmented
+            ariaLabel="Категории библиотеки"
+            active={tab}
+            onChange={setTab}
+            items={[
+              { id: 'practice', label: 'Практики' },
+              { id: 'breath', label: 'Дыхание' },
+              { id: 'content', label: 'Контент' },
+            ]}
+          />
         </div>
 
-        <div className="stack-3" style={{ marginTop: 'var(--sp-4)' }}>
+        <Stack gap={3} style={{ marginTop: 'var(--sp-4)' }}>
           {items.map((it) => (
             <div key={it.id} className="action-row" onClick={() => onOpen('article-' + it.id)}>
               <LibThumb kind={it.thumb} />
@@ -96,9 +90,9 @@ export default function LibraryScreen({ onOpen }) {
               <IconChevR size={16} stroke="var(--text-tertiary)" sw={2} />
             </div>
           ))}
-        </div>
-      </div>
-    </div>
+        </Stack>
+      </ScreenScroll>
+    </Screen>
   );
 }
 

@@ -115,14 +115,14 @@
   max-width: 36ch;
 }
 
-/* Кнопка: те же --r-pill / --btn-pill-* что и CTA в приложении (см. ds-tokens.css) */
+/* Кнопка: --r-control — как .pill-action */
 #app-splash__start,
 .app-splash__start {
   width: 100%;
-  min-height: var(--btn-pill-min-height, 48px);
-  padding: 0 var(--btn-pill-padding-x, 20px);
+  min-height: var(--btn-cta-min-height, 48px);
+  padding: 0 var(--btn-cta-padding-x, 20px);
   border: none;
-  border-radius: var(--r-pill, 9999px);
+  border-radius: var(--r-control, 12px);
   background: #fff;
   color: #d9469f;
   font-size: 17px;

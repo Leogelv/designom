@@ -269,7 +269,7 @@ button {
   gap: var(--sp-2);
   height: 52px;
   padding: 0 var(--sp-5);
-  border-radius: var(--r-pill);
+  border-radius: var(--r-control);
   background: var(--primary-600);
   color: var(--text-inverse);
   font-family: var(--font-primary);
@@ -290,7 +290,7 @@ button {
   gap: var(--sp-2);
   height: 48px;
   padding: 0 var(--sp-5);
-  border-radius: var(--r-pill);
+  border-radius: var(--r-control);
   background: var(--lavender-1);
   color: var(--primary-600);
   font-family: var(--font-primary);
@@ -305,7 +305,7 @@ button {
 
 .icon-btn {
   width: 40px; height: 40px;
-  border-radius: var(--r-pill);
+  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -324,7 +324,7 @@ button {
 /* Circular check / plus chip */
 .chip-check {
   width: 24px; height: 24px;
-  border-radius: var(--r-pill);
+  border-radius: 50%;
   background: var(--success);
   color: var(--text-inverse);
   display: inline-flex;
@@ -334,7 +334,7 @@ button {
 }
 .chip-plus {
   width: 24px; height: 24px;
-  border-radius: var(--r-pill);
+  border-radius: 50%;
   background: var(--primary-600);
   color: var(--text-inverse);
   display: inline-flex;
@@ -356,7 +356,7 @@ button {
   align-items: center;
   height: 24px;
   padding: 0 12px;
-  border-radius: var(--r-pill);
+  border-radius: var(--r-control);
   font-family: var(--font-secondary);
   font-size: 12px;
   font-weight: 600;
@@ -476,7 +476,7 @@ button {
 
 .ai-orb {
   position: relative;
-  border-radius: var(--r-pill);
+  border-radius: 50%;
   background: var(--primary-900);
   border: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow:
@@ -697,7 +697,7 @@ button {
 }
 .grad-tile-badge {
   width: 26px; height: 26px;
-  border-radius: var(--r-pill);
+  border-radius: 50%;
   background: rgba(255,255,255,0.22);
   border: 1px solid rgba(255,255,255,0.25);
   display: inline-flex; align-items: center; justify-content: center;
@@ -826,7 +826,7 @@ button {
 
 .chip-check-sm {
   width: 20px; height: 20px;
-  border-radius: var(--r-pill);
+  border-radius: 50%;
   border: 1.6px solid var(--success);
   color: var(--success);
   background: white;
@@ -835,7 +835,7 @@ button {
 }
 .chip-plus-sm {
   width: 20px; height: 20px;
-  border-radius: var(--r-pill);
+  border-radius: 50%;
   border: 1.6px solid var(--primary-500);
   color: var(--primary-600);
   background: white;
@@ -898,7 +898,7 @@ button {
   align-items: center;
   height: 22px;
   padding: 0 10px;
-  border-radius: var(--r-pill);
+  border-radius: var(--r-control);
   background: var(--success-soft);
   color: var(--success);
   font-family: var(--font-secondary);
@@ -937,7 +937,7 @@ button {
 /* обёртка для орба AI (рекомендации / др.) */
 .rec-orb {
   width: 62px; height: 62px;
-  border-radius: var(--r-pill);
+  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -948,7 +948,7 @@ button {
 /* Small right-side arrow chip */
 .arrow-chip {
   width: 34px; height: 34px;
-  border-radius: var(--r-pill);
+  border-radius: 50%;
   background: white;
   border: 1.5px solid var(--primary-300);
   color: var(--primary-600);
@@ -998,7 +998,7 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--r-pill);
+  border-radius: 50%;
   color: var(--text-primary);
   transition: background var(--dur-fast) var(--ease-std);
 }

@@ -82,7 +82,6 @@
   --r-xxl: 28px;
   --r-card: 24px;
   --r-hero-card: 28px;
-  --r-pill: 9999px;
   --r-input: 16px;
 
   /* ── Spacing (4px scale) ── */
@@ -125,7 +124,7 @@
   --font-primary: "SF Pro Display", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-secondary: "SF Pro Text", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Кнопки-«пилюли» (сплэш, полноширинные CTA): = остальным pill-кнопкам приложения */
-  --btn-pill-min-height: 48px;
-  --btn-pill-padding-x: var(--sp-5);
+  /* Широкие CTA (сплэш, полноширинные) — высота/гориз. отступы */
+  --btn-cta-min-height: 48px;
+  --btn-cta-padding-x: var(--sp-5);
 }
